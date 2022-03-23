@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+
+<!--  문서 유형 선 -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+  <environments default="development">
+    <environment id="development">
+    <!-- 데이터 베이스 연결 관 -->
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@kosa1.iptime.org:50123/orcl"/>
+        <property name="username" value="java"/>
+        <property name="password" value="kosa12345"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!-- xml(sql)위치 설정 -->
+  <!-- mybatis는 sql이 작성 불가능 하기 때문에 개발자가 직접 작성을 해주고 맵핑을 통해 연결해줘야 한다. -->
+  <mappers>
+ 	<mapper resource="config/mapper/user.xml"/>
+ 	<mapper resource="config/mapper/board.xml"/>
+ 	<mapper resource="config/mapper/account.xml"/>
+  </mappers>
+</configuration>

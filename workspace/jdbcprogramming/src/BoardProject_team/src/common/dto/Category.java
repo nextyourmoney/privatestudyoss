@@ -1,0 +1,7 @@
+package BoardProject_team.src.common.dto;
+
+public class Category {
+	
+	private int categoryid;
+	private String categoryname;
+}
