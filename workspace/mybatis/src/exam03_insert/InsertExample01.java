@@ -36,8 +36,10 @@ public class InsertExample01 {
 		
 			
 			//방법#2
+			//getbno는 board.xml에서 berfore의 작업을 해주어야 가능하다.
 			int rows = session.insert("dao.BoardDao.insertBoard", board);
 			System.out.println("저장된 행수: " + rows);
+			System.out.println("저장된 게시물의 번호: " + board.getBno());
 			
 			
 		} catch(Exception e) {

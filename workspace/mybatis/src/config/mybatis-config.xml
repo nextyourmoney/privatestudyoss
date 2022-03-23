@@ -8,6 +8,13 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
 <configuration>
+	<!-- 타입 별명 설정 -->
+	<!-- 별칭 설정을 토해 코드의 길이를 줄일 수 있고 해당 별칭은 반드시 앞쪽에 와야한다.  -->
+	<typeAliases>
+		<typeAlias type = "dto.User" alias = "user"/>
+		<typeAlias type = "dto.Board" alias = "board"/>
+		<typeAlias type = "dto.Pager" alias = "pager"/>
+	</typeAliases>
 
   <environments default="development">
     <environment id="development">

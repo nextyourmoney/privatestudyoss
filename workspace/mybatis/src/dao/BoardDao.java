@@ -20,6 +20,15 @@ public interface BoardDao {
 	
 	public Board selectBoardwithUser(int bno);
 	
+	public Board selectBoardwithUser2(int bno);
+	
+	public int updateBoard(Board board);
+
+	public int deleteBoard(int bno);
+	
+	
+
+	
 	
 
 }

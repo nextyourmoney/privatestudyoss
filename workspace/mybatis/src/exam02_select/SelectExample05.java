@@ -9,7 +9,7 @@ import dao.BoardDao;
 import dto.Board;
 import dto.Pager;
 
-public class SelectExample04 {
+public class SelectExample05 {
 
 	public static void main(String[] args) {
 		
@@ -22,12 +22,13 @@ public class SelectExample04 {
 			
 			
 			//방법#1
-			//Board board = boardDao.selectBoardwithUser(40);
+			Board board = boardDao.selectBoardwithUser2(40);
 			
 			//방법#2
-			Board board = session.selectOne("dao.BoardDao.selectBoardwithUser",40);
+			//Board board = session.selectOne("dao.BoardDao.selectBoardwithUser",40);
 			System.out.println(board);
 			System.out.println(board.getUser().getUserName());
+			System.out.println(board.getUser().getUserEmail());
 			
 			
 		} catch(Exception e) {
