@@ -1,13 +1,13 @@
-package common.dao;
+package teamBoard_mybatis.common.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import common.ConnectionManager;
-import common.dto.Board;
-import common.dto.User;
+import teamBoard_mybatis.common.ConnectionManager;
+import teamBoard_mybatis.common.dto.Board;
+import teamBoard_mybatis.common.dto.User;
 
 public class Userdao {
 
@@ -21,7 +21,7 @@ public class Userdao {
 		try {
 			conn = ConnectionManager.getConnection();
 
-			String sql_id_check = "select userid from users where userid=?"; 
+			String sql_id_check = "select userid from users_team where userid=?"; 
 			PreparedStatement pstmt_id_check = conn.prepareStatement(sql_id_check);
 			System.out.println(user.getUserId());
 			pstmt_id_check.setString(1, user.getUserId());
@@ -37,7 +37,7 @@ public class Userdao {
 			pstmt_id_check.close();
 
 
-			String sql_nickname_check = "select usernickname from users where usernickname=?"; 
+			String sql_nickname_check = "select usernickname from users_team where usernickname=?"; 
 			PreparedStatement pstmt_nickname_check = conn.prepareStatement(sql_nickname_check);
 			System.out.println(user.getUserNickName());
 			pstmt_nickname_check.setString(1, user.getUserNickName());
@@ -56,7 +56,7 @@ public class Userdao {
 			}
 			
 			if(!nickname_check && !id_check) {
-				String sql = "insert into users values (?, ?, ?, ?, ?, ?, ?)"; 
+				String sql = "insert into users_team values (?, ?, ?, ?, ?, ?, ?)"; 
 
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, user.getUserId());
@@ -92,7 +92,7 @@ public class Userdao {
 			conn = ConnectionManager.getConnection();
 
 			//아이디가 존재하는지 확인 
-			String sql2 = "select userid from users where userid=?";
+			String sql2 = "select userid from users_team where userid=?";
 			
 			PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 			pstmt2.setString(1, userId);
@@ -110,7 +110,7 @@ public class Userdao {
 			pstmt2.close();
 
 			if(idCheck) {
-				String sql = "select userid, userpassword, usernickname, username, userage, userphonenumber, useremail from users where userid=? and userpassword=?"; 
+				String sql = "select userid, userpassword, usernickname, username, userage, userphonenumber, useremail from users_team where userid=? and userpassword=?"; 
 
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, userId);

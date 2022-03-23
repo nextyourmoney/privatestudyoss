@@ -1,12 +1,12 @@
-package common.Service;
+package teamBoard_mybatis.common.Service;
 
 import java.util.List;
 import java.util.Scanner;
 
-import common.dao.FriendDao;
-import common.dto.Board;
-import common.dto.User;
-import common.paging.Pager;
+import teamBoard_mybatis.common.dao.FriendDao;
+import teamBoard_mybatis.common.dto.Board;
+import teamBoard_mybatis.common.dto.User;
+import teamBoard_mybatis.common.paging.Pager;
 
 public class FriendService {
 	private FriendDao friendDao= new FriendDao();

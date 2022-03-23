@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 실제 sqlrhk 맵퍼의 개채값과리턴값도 설정한다. -->
+<!--  id값은 메소드의 이름이다 -->
+<mapper namespace="dao.BoardDao">
+	<select id="selectBoard" parameterType="int" resultType = "dto.Board">
+		select bno, btitle, bcontent, bwriter, bdate
+		from boards
+		where bno = #{bno}
+		<!-- {bno}에는 무엇이 오든 상관 없다 -->
+	</select>
+	
+	<!--  기본적으로 반환되는 값이 list이다 그렇기때문에 개채타입 반환이 필요없다. -->
+	<select id="selectAll" resultType = "dto.Board">
+		select bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata
+		from boards
+		order by bno desc
+	</select>
+	
+	<select id="selectTotalRowCount" resultType="int">
+		select count(*) from boards
+	</select>
+	
+	<!-- 페이지 처리를 위한 메소드 -->
+	<select id="selectPage" parameterType = "dto.Pager" resultType = "board">
+	<!-- resultType = "dto.Board"도 가능 -->
+		<!-- <![CDATA[....]]는 사용된 그대로의 문자로 사용되도록 하는 명령이다. -->
+		
+		<![CDATA[
+		select rnum, bno, btitle, bwriter, bdate, bfilename
+		from (
+			select rownum as rnum, bno, btitle, bwriter, bdate, bfilename
+			from (
+				select bno, btitle, bwriter, bdate, bfilename
+				from boards
+				order by bno desc
+			)
+			 where rownum <= #{endRowNo}
+		)
+		
+		where rnum >= #{startRowNo}
+		]]>
+		
+	</select>
+	
+	<!-- 연 -->
+	<resultMap id = "selectBoardwithUserResultMap" type = "board">
+	<!-- Type = "dto.Board"도 가능 -->
+		<result column = "bno" property="bno"/>
+		<result column = "btitle" property="btitle"/>
+		<result column = "bcontent" property="bcontent"/>
+		<result column = "bwriter" property="bwriter"/>
+		<result column = "bdate" property="bdate"/>
+		<result column = "bfiledata" property="bfiledata"/>
+		<result column = "bfilename" property="bfilename"/>
+		
+		<association property="user" javaType="dto.User">
+			<result column = "userid" property="userId"/>
+			<result column = "username" property="userName"/>
+			<result column = "userpassword" property="userPassword"/>
+			<result column = "userage" property="userAge"/>
+			<result column = "useremail" property="userEmail"/>
+		
+		</association>
+	</resultMap>
+	
+	<select id="selectBoardwithUser" parameterType = "int" resultMap = "selectBoardwithUserResultMap" >
+	select
+		bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata, 
+		userid, username, userpassword, userage, useremail
+	from boards b, users u
+	where b.bwriter = u.userid and b.bno = #{bno}
+	</select>
+	
+	<!-- ***************************************************************** -->
+	
+	<resultMap id = "selectBoardwithUser2ResultMap" type = "board">
+	<!-- Type = "dto.Board"도 가능 -->
+		<result column = "bno" property="bno"/>
+		<result column = "btitle" property="btitle"/>
+		<result column = "bcontent" property="bcontent"/>
+		<result column = "bwriter" property="bwriter"/>
+		<result column = "bdate" property="bdate"/>
+		<result column = "bfiledata" property="bfiledata"/>
+		<result column = "bfilename" property="bfilename"/>
+		<association property = "user" javaType = "dto.User" column = "bwriter" select = "dao.UserDao.selectUser"/>
+		<!-- association은 추가 실행이다. -->
+	</resultMap>
+	
+	<!-- user.xml과 연결된다. -->
+	<select id="selectBoardwithUser2" parameterType = "int" resultMap = "selectBoardwithUser2ResultMap" >
+		select
+			bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata
+		from boards
+		where bno = #{bno}
+	</select>
+	
+	<!-- ***************************************************************** -->
+	
+	<!-- user.xml의 resultmap에서 구할 때 사용된다. -->
+	<select id ="selectByBwriter" parameterType = "string" resultType = "board">
+	<!-- resultType = "dto.Board"도 가능 -->
+		select bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata
+		from boards
+		where bwriter = #{bwriter}
+	</select>
+	
+
+	<!-- ***************************************************************** -->
+	
+	<!-- data insert -->
+	<insert id="insertBoard" parameterType="dto.Board">
+	
+		<!-- 하단의 insert 실행 전 selectkey부터 씰행하여 세팅을 한다.  -->
+		<selectKey keyProperty = "bno" resultType = "int" order = "BEFORE"> 
+			select seq_boards_bno.nextval from dual
+		</selectKey>
+		<!-- 하단의 bno는 위에서 지정정 된 bno이
+		 -->
+ 		insert into boards (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata)
+		values(
+			#{bno},
+			#{btitle},
+			#{bcontent},
+			#{bwriter},
+			sysdate,
+			null,
+			null
+		)
+	</insert>
+	
+	
+	<!-- ***************************************************************** -->
+	
+	<update id="updateBoard" parameterType = "board">
+		update boards set
+			btitle = #{btitle},
+			bcontent = #{bcontent}
+		where bno = #{bno}
+	
+	</update>
+	
+	<!-- ***************************************************************** -->
+	
+	<delete id="deleteBoard" parameterType = "int">
+		delete from boards where bno=#{bno}
+	
+	</delete>
+	
+
+</mapper>

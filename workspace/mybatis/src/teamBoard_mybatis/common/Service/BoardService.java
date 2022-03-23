@@ -1,9 +1,9 @@
-package common.Service;
+package teamBoard_mybatis.common.Service;
 
 import java.util.List;
 
-import common.dao.BoardDao;
-import common.dto.Board;
+import teamBoard_mybatis.common.dao.BoardDao;
+import teamBoard_mybatis.common.dto.Board;
 
 public class BoardService {
 

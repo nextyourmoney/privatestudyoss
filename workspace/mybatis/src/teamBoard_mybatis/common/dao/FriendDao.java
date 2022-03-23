@@ -1,4 +1,4 @@
-package common.dao;
+package teamBoard_mybatis.common.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.ConnectionManager;
-import common.dto.Board;
-import common.dto.Friend;
-import common.dto.User;
-import common.paging.Pager;
+import teamBoard_mybatis.common.ConnectionManager;
+import teamBoard_mybatis.common.dto.Board;
+import teamBoard_mybatis.common.dto.Friend;
+import teamBoard_mybatis.common.dto.User;
+import teamBoard_mybatis.common.paging.Pager;
 
 public class FriendDao {
 
@@ -24,7 +24,7 @@ public class FriendDao {
 			//연결
 			conn=ConnectionManager.getConnection();
 			
-			String sql="select usernickname  from users where usernickname=?";
+			String sql="select usernickname  from users_team where usernickname=?";
 			PreparedStatement pstm1=conn.prepareStatement(sql);
 			pstm1.setString(1,name);
 			ResultSet rs=pstm1.executeQuery();
@@ -33,7 +33,7 @@ public class FriendDao {
 			}
 			
 			if(row==1) {
-				String sql2="insert into friend(myrel,friendrel) "
+				String sql2="insert into friend_team(myrel,friendrel) "
 					+ "values(?,?)";
 			//sql실행 state얻기
 				PreparedStatement pstm2=conn.prepareStatement(sql2);
@@ -77,7 +77,7 @@ public class FriendDao {
 								.append(" select rownum as rnum,friendrel,username,userage,userphonenumber,useremail")
 								.append("  from (")
 								.append(" select f.friendrel,u.username,u.userage,u.userphonenumber,u.useremail")
-								.append(" from friend f, users u")
+								.append(" from friend_team f, users_team u")
 								.append(" where f.myrel=? and u.usernickname=f.friendrel")
 								.append("  ) ")
 								.append(" where rownum<=?")
@@ -123,7 +123,7 @@ public class FriendDao {
 			//연결
 			conn=ConnectionManager.getConnection();
 
-			String sql="delete from friend where myrel=? and friendrel=?";
+			String sql="delete from friend_team where myrel=? and friendrel=?";
 			//sql실행 state얻기
 			PreparedStatement pstm=conn.prepareStatement(sql);
 			pstm.setString(1,id);
@@ -168,7 +168,7 @@ public class FriendDao {
 								.append(" select rownum as rnum,bwriter,btitle,bdate")
 								.append("  from (")
 								.append(" select b.bwriter,b.btitle,b.bdate")
-								.append(" from  friend f,boards b")
+								.append(" from  friend_team f,boards_team b")
 								.append(" where f.myrel=? and f.friendrel=b.bwriter")
 								.append("  ) ")
 								.append(" where rownum<=?")
@@ -215,7 +215,7 @@ public class FriendDao {
 				conn=ConnectionManager.getConnection();
 				
 				
-				String sq2="select count(*) as totalRows from friend where myrel=?";
+				String sq2="select count(*) as totalRows from friend_team where myrel=?";
 				PreparedStatement pstm=conn.prepareStatement(sq2);
 				pstm.setString(1, keyid);
 				//실행해서 결과셋얻기
@@ -246,7 +246,7 @@ public class FriendDao {
 				//연결
 				conn=ConnectionManager.getConnection();
 				
-				String sql="select count(*) as totalRows from friend f, boards b where f.myrel=? and f.friendrel=b.bwriter";
+				String sql="select count(*) as totalRows from friend_team f, boards_team b where f.myrel=? and f.friendrel=b.bwriter";
 				PreparedStatement pstm=conn.prepareStatement(sql);
 				pstm.setString(1, keyid);
 				//실행해서 결과셋얻기

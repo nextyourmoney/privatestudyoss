@@ -1,11 +1,11 @@
-package common.Service;
+package teamBoard_mybatis.common.Service;
 
 import java.util.List;
 import java.util.Scanner;
 
-import common.dao.CategoryDao;
-import common.dto.Board;
-import common.paging.Pager;
+import teamBoard_mybatis.common.dao.CategoryDao;
+import teamBoard_mybatis.common.dto.Board;
+import teamBoard_mybatis.common.paging.Pager;
 
 public class CategoryService {
 	private CategoryDao categoryDao = new CategoryDao();

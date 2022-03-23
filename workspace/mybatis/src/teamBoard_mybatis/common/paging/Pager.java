@@ -1,4 +1,4 @@
-package common.paging;
+package teamBoard_mybatis.common.paging;
 
 import java.util.Scanner;
 

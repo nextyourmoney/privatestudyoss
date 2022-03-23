@@ -1,4 +1,4 @@
-package common.dao;
+package teamBoard_mybatis.common.dao;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import common.ConnectionManager;
-import common.dto.Board;
-import common.paging.Pager;
+import teamBoard_mybatis.common.ConnectionManager;
+import teamBoard_mybatis.common.dto.Board;
+import teamBoard_mybatis.common.paging.Pager;
 
 public class BoardDao {
 	private Pager pager;
@@ -43,7 +43,7 @@ public class BoardDao {
 	         
 	            case "1": //닉네임 검색
 	               sql = new StringBuilder()
-	                  .append("select b.btitle, b.bwriter, b.bdate from users u,boards b where b.bwriter=u.usernickname and u.usernickname=?").toString();
+	                  .append("select b.btitle, b.bwriter, b.bdate from users_team u,boards b where b.bwriter=u.usernickname and u.usernickname=?").toString();
 	               
 	               System.out.print("닉네임으로 게시글 검색: ");
 	               searchContent = scanner.nextLine();
@@ -52,7 +52,7 @@ public class BoardDao {
 	               
 	            case "2": //제목 검색
 	               sql = new StringBuilder()
-	                  .append("select b.btitle, b.bwriter, b.bdate from users u,boards b where b.bwriter=u.usernickname and b.btitle=?").toString();
+	                  .append("select b.btitle, b.bwriter, b.bdate from users_team u,boards b where b.bwriter=u.usernickname and b.btitle=?").toString();
 	               nickNameOrTitle=2;
 
 	               System.out.print("제목으로 게시글 검색: ");
@@ -125,7 +125,7 @@ public class BoardDao {
 				//연결
 				conn = ConnectionManager.getConnection2();
 				
-				String sqlWriter = "select usernickname from users where userid = ?";
+				String sqlWriter = "select usernickname from users_team where userid = ?";
 				PreparedStatement pstmWriter = conn.prepareStatement(sqlWriter); //작성자를 가져오기 위해 user테이블의 닉테임 컬럼값을 가져온다.
 				pstmWriter.setString(1, nickname); //동작 테스트를 위하여 하드 코딩 진행 //수정 예정
 				
@@ -140,8 +140,8 @@ public class BoardDao {
 		         }
 		      //  if(run==true) {
 				
-				String sql = "insert into boards (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata, bcategoryid)"
-						+ " values(seq_boards_bno.nextval, ?, ?, ?, sysdate, ?, ?, ?)";
+				String sql = "insert into boards_team (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata, bcategoryid)"
+						+ " values(seq_boards_team_bno.nextval, ?, ?, ?, sysdate, ?, ?, ?)";
 
 				PreparedStatement pstm = conn.prepareStatement(sql);				
 				
@@ -205,7 +205,7 @@ public class BoardDao {
 			conn = ConnectionManager.getConnection();
 
 			
-			String sql = "update boards set btitle = ?, bcontent = ?, bcategoryid = ? ";
+			String sql = "update boards_team set btitle = ?, bcontent = ?, bcategoryid = ? ";
 			sql += (!board.getBfilename() .equals("") ) ? ", bfilename = ? , bfiledata = ? " : " ";
 			sql += " where bno = ?";
 			System.out.println(sql);
@@ -257,7 +257,7 @@ public class BoardDao {
 		try {
 				//연결
 				conn=ConnectionManager.getConnection();
-				String sq2="select count(*) as totalRows from boards";
+				String sq2="select count(*) as totalRows from boards_team";
 				PreparedStatement pstm=conn.prepareStatement(sq2);
 				//실행해서 결과셋얻기
 				ResultSet rs=pstm.executeQuery();
@@ -288,7 +288,7 @@ public class BoardDao {
 		try {
 				//연결대여
 				conn=ConnectionManager.getConnection2();
-				String sq2 = "delete from boards where bno = ?";
+				String sq2 = "delete from boards_team where bno = ?";
 				PreparedStatement pstm=conn.prepareStatement(sq2);
 				pstm.setInt(1, bno);
 				
@@ -320,7 +320,7 @@ public class BoardDao {
 			//연결
 			conn=ConnectionManager.getConnection2();
 			
-			String sql="select bno, btitle, bwriter, bdate, bcontent, bfilename, bcategoryid from boards where bno = ?";
+			String sql="select bno, btitle, bwriter, bdate, bcontent, bfilename, bcategoryid from boards_team where bno = ?";
 			
 			//sql실행 state얻기
 			PreparedStatement pstm = conn.prepareStatement(sql);
@@ -371,7 +371,7 @@ public class BoardDao {
 	      try {
 	         conn = ConnectionManager.getConnection2();
 	         
-	         String sql = "select count(*) from boards"; //전체 개수 
+	         String sql = "select count(*) from boards_team"; //전체 개수 
 	        		 
 	         PreparedStatement pstmt = conn.prepareStatement(sql);
 	         ResultSet rs = pstmt.executeQuery();
@@ -397,7 +397,7 @@ public class BoardDao {
 		Connection conn = null;
 		try {
 			conn = ConnectionManager.getConnection();
-			String sql="select bno from boards where bno=?";
+			String sql="select bno from boards_team where bno=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			ResultSet rs = pstmt.executeQuery();

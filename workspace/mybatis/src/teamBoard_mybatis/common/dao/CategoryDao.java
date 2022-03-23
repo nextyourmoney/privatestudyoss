@@ -1,4 +1,4 @@
-package common.dao;
+package teamBoard_mybatis.common.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.ConnectionManager;
-import common.dto.Board;
-import common.paging.Pager;
+import teamBoard_mybatis.common.ConnectionManager;
+import teamBoard_mybatis.common.dto.Board;
+import teamBoard_mybatis.common.paging.Pager;
 
 public class CategoryDao {
 	//카테고리 아이디로 카테고리별 리스트 가져오기
@@ -27,7 +27,7 @@ public class CategoryDao {
 					.append("	select rownum as rnum, bno, bwriter, btitle, bdate ")
 					.append("	from ( ")
 					.append("		select b.bno, b.bwriter, b.btitle, b.bdate ")
-					.append("		from boards b, categories c ")
+					.append("		from boards_team b, categories_team c ")
 					.append("		where b.bcategoryid = c.categoryid and b.bcategoryid = ? ")
 					.append("		order by b.bno desc ")
 					.append("	) ")
@@ -71,7 +71,7 @@ public class CategoryDao {
 		try {
 			conn = ConnectionManager.getConnection();
 			
-			String sql = "select count(*) from boards where bcategoryid = ? ";
+			String sql = "select count(*) from boards_team where bcategoryid = ? ";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, categoryid);
@@ -105,7 +105,7 @@ public class CategoryDao {
 					.append("	select rownum as rnum, bno, bwriter, btitle, bdate ")
 					.append("	from ( ")
 					.append("		select bno, bwriter, btitle, bdate ")
-					.append("		from boards")
+					.append("		from boards_team")
 					.append("		order by bno desc ")
 					.append("	) ")
 					.append("	where rownum <= ? ")
@@ -147,7 +147,7 @@ public class CategoryDao {
 		try {
 			conn = ConnectionManager.getConnection();
 			
-			String sql = "select count(*) from boards";
+			String sql = "select count(*) from boards_team";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			

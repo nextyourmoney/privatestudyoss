@@ -1,18 +1,18 @@
-package main;
+package teamBoard_mybatis.main;
 
 import java.util.List;
 import java.util.Scanner;
 
-import common.ConnectionManager;
-import common.Service.BoardService;
-import common.Service.CategoryService;
-import common.Service.FriendService;
-import common.Service.InsertBoards;
-import common.Service.InsertUser;
-import common.Service.UserService;
-import common.dto.Board;
-import common.dto.User;
-import common.paging.Pager;
+import teamBoard_mybatis.common.ConnectionManager;
+import teamBoard_mybatis.common.Service.BoardService;
+import teamBoard_mybatis.common.Service.CategoryService;
+import teamBoard_mybatis.common.Service.FriendService;
+import teamBoard_mybatis.common.Service.InsertBoards;
+import teamBoard_mybatis.common.Service.InsertUser;
+import teamBoard_mybatis.common.Service.UserService;
+import teamBoard_mybatis.common.dto.Board;
+import teamBoard_mybatis.common.dto.User;
+import teamBoard_mybatis.common.paging.Pager;
 
 
 public class BoardExample {

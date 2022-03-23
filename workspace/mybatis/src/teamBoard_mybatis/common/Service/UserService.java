@@ -1,9 +1,9 @@
-package common.Service;
+package teamBoard_mybatis.common.Service;
 
 import java.util.Scanner;
 
-import common.dao.Userdao;
-import common.dto.User;
+import teamBoard_mybatis.common.dao.Userdao;
+import teamBoard_mybatis.common.dto.User;
 
 
 public class UserService {

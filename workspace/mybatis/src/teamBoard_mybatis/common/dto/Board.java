@@ -1,4 +1,4 @@
-package common.dto;
+package teamBoard_mybatis.common.dto;
 
 import java.sql.*;
 import java.util.Date;

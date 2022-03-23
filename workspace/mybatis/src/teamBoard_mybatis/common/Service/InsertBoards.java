@@ -1,4 +1,4 @@
-package common.Service;
+package teamBoard_mybatis.common.Service;
 
 import java.sql.Connection;
 import java.sql.Date;

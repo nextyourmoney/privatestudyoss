@@ -1,4 +1,4 @@
-package common;
+package teamBoard_mybatis.common;
 
 import java.sql.Connection;
 

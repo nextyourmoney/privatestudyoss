@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.UserDao">
+	<!-- ***************************************************************** -->	
+	<!--  아래으 ㅣbwriter는 board.xml resultmap의 column = bwriter와 같다  -->
+	<!--  id의 selectUser는위의 select = selectUser의 값이다 -->
+	<select id = "selectUser" parameterType = "string" resultType = "user">
+	<!-- resultType = "dao.User"의 형식도 가능 -->
+		select userid, username, userpassword, userage, useremail
+		from users
+		where userid = #{bwriter}
+		
+	</select>
+	
+	<!-- ***************************************************************** -->
+	<resultMap type="dto.User" id="selectUserwithBoardsResultMap">
+		<result column = "userid" property="userId"/>
+		<result column = "username" property="userName"/>
+		<result column = "userpassword" property="userPassword"/>
+		<result column = "userage" property="userAge"/>
+		<result column = "useremail" property="userEmail"/>
+		<!-- 여기서 column의 userid는 select의 dao.BoardDoa.selectByBwriter를 실행하기 위해 있다.  그리고 select는 propoert를 가져온다. -->
+		<collection property="boards" ofType = "dto.Board" column="userid" select = "dao.BoardDao.selectByBwriter"></collection>
+	</resultMap>
+	
+	<select id = "selectUserwithBoards" parameterType = "string" resultMap="selectUserwithBoardsResultMap"> 
+		select userid, username, userpassword, userage, useremail
+		from users
+		where userid = #{userid}
+	</select>
+	
+	<!-- ***************************************************************** -->
+	
+	<insert id="insertUser" parameterType = "user">
+	<!-- values는 dto.User의 값들과 일치해야한다. -->
+		insert into users (userid, username, userpassword, userage, useremail)
+		values (#{userId}, #{userName}, #{userPassword}, #{userAge}, #{userEmail})
+	</insert>
+	
+	
+	
+	
+
+</mapper>
