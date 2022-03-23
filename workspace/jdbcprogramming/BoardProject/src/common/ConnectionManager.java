@@ -17,7 +17,7 @@ public class ConnectionManager {
 			basicDataSource.setMaxTotal(10);
 			basicDataSource.setMaxIdle(5);
 			basicDataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-			basicDataSource.setUrl("jdbc:oracle:thin:@kosa1.iptime.org:50118/orcl");
+			basicDataSource.setUrl("jdbc:oracle:thin:@kosa1.iptime.org:50123/orcl");
 			basicDataSource.setUsername("java");
 			basicDataSource.setPassword("kosa12345");
 			
@@ -34,7 +34,7 @@ public class ConnectionManager {
 	public static Connection getConnection2() throws ClassNotFoundException,SQLException{
 		
 		Class.forName("oracle.jdbc.OracleDriver");
-		Connection conn=DriverManager.getConnection("jdbc:oracle:thin:@kosa1.iptime.org:50118/orcl","java","kosa12345");
+		Connection conn=DriverManager.getConnection("jdbc:oracle:thin:@kosa1.iptime.org:50123/orcl","java","kosa12345");
 		
 		return conn;
 		
