@@ -16,11 +16,11 @@ public class InsertBoards {
 		try {
 			//연결하기
 			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@kosa1.iptime.org:50118/orcl", "java", "kosa12345");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@kosa1.iptime.org:50123/orcl", "java", "kosa12345");
 			
 						
 			//실행해야할 SQL 작성
-			String sql = "insert into boards(bno,btitle, bcontent,bwriter,bdate,bfilename,bfiledata,bcategoryid) values(?,?,?,?,sysdate,?,?,?)";
+			String sql = "insert into boards_team(bno, btitle, bcontent,bwriter,bdate,bfilename,bfiledata,bcategoryid) values(?,?,?,?,sysdate,?,?,?)";
 			
 			//SQL을 실행할 PreparedStatment 얻기
 			PreparedStatement pstmt = conn.prepareStatement(sql);

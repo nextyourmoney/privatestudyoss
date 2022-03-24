@@ -43,7 +43,7 @@ public class BoardDao {
 	         
 	            case "1": //닉네임 검색
 	               sql = new StringBuilder()
-	                  .append("select b.btitle, b.bwriter, b.bdate from users_team u,boards b where b.bwriter=u.usernickname and u.usernickname=?").toString();
+	                  .append("select b.btitle, b.bwriter, b.bdate from users_team u, boards_team b where b.bwriter=u.usernickname and u.usernickname=?").toString();
 	               
 	               System.out.print("닉네임으로 게시글 검색: ");
 	               searchContent = scanner.nextLine();
@@ -52,7 +52,7 @@ public class BoardDao {
 	               
 	            case "2": //제목 검색
 	               sql = new StringBuilder()
-	                  .append("select b.btitle, b.bwriter, b.bdate from users_team u,boards b where b.bwriter=u.usernickname and b.btitle=?").toString();
+	                  .append("select b.btitle, b.bwriter, b.bdate from users_team u,boards_team b where b.bwriter=u.usernickname and b.btitle=?").toString();
 	               nickNameOrTitle=2;
 
 	               System.out.print("제목으로 게시글 검색: ");
@@ -139,7 +139,7 @@ public class BoardDao {
 		        	 rows=-1;
 		         }
 		      //  if(run==true) {
-				
+				System.out.println("RLdikdkdkdkdk");
 				String sql = "insert into boards_team (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata, bcategoryid)"
 						+ " values(seq_boards_team_bno.nextval, ?, ?, ?, sysdate, ?, ?, ?)";
 
