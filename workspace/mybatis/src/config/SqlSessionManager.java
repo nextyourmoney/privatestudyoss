@@ -18,6 +18,7 @@ public class SqlSessionManager {
 		
 		//(3월 23일) 아래의 sqlSessionFactory는 사용자가 생성및 관리한다.
 		try {
+			
 			String resource = "config/mybatis-config.xml";
 			InputStream inputStream = Resources.getResourceAsStream(resource); //여기서 resourc는 org.apache.ibatis.io.resource에서 제공된다. //상대 경로로 파일 얻는다.
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);

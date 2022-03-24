@@ -144,7 +144,7 @@
 	
 	<!-- ***************************************************************** -->
 	
-	<delete id="deleteBoard" parameterType = "int">
+	<delete id="delteBoard" parameterType = "int">
 		delete from boards where bno=#{bno}
 	
 	</delete>
