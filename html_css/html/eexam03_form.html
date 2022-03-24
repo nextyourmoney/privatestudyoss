@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action = "#" method="post">
+        <div>
+            <label for="userId">User Id</label>
+            <input id="userId" type = "text" name="userId" value="이름"/>
+        </div>
+
+        <div>
+            <label for = "userPassword">User Password</label>
+            <input id="userPssword" type = "password" name="userPassword" plaaceholder = "비밀번호"/>
+        </div>
+
+        <div>
+            <label>User Skill</label>
+            <input type="checkbox" type = "skill" value="java"/> java
+            <input type="checkbox" type = "skill" value="db"/> db
+            <input type="checkbox" type = "skill" value="css"/> css
+            <input type="checkbox" type = "skill" value="html"/> html
+            <input type="checkbox" type = "skill" value="script"/> script
+        </div>
+
+        <div>
+            <label>User Job</label>
+            <input type="checkbox" type = "job" value="개발자"/> java
+            <input type="checkbox" type = "job" value="디자이너"/> db
+            <input type="checkbox" type = "job" value="설계자"/> css
+            
+        </div>
+
+        <div>
+            <label>HIREDATE: </label>
+            <input type="date" name="hiredate" value="2000-11-25"/> 
+        </div>
+
+        <div>
+            <label>Age </label>
+            <input type="number" name="age" min="1" max="100"/> 
+        </div>
+
+        <div>
+            <label>email </label>
+            <input type="email" name="userEmail" min="1" max="100"/> 
+        </div>
+
+        <hr/>
+
+        <div>
+            <!--양식 데이터 전송-->
+            <button>제출</button>
+            <input type="submit" value="제출"/>
+            <input type="image" src="/images/sub.jpeg" width="50" height="50"/>
+        </div>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* div{
+            background-color: aqua;
+        }
+
+        #div1{
+            background-color: red;
+        }
+
+        .class1{
+            background-color: chartreuse;
+        } */
+
+        div{
+            background-color: red;
+        }
+
+        .class1{
+            background-color: green;
+        }
+
+        #div1{
+            background-color: blue;
+        }
+
+        /* div안의 모든 div적용 */
+        #div2 div {
+            background-color: yellow;
+        }
+
+        /* div2내부의 바로 아래 div에만 적용 */
+        #div2 > div {
+            background-color: aqua;
+        }
+
+        #div2 .class2{
+            background-color: orange;
+        }
+
+        #div2 .class2{
+            background-color: skyblue;
+        }
+
+        .class3{
+            background-color: violet;
+        }
+
+        .class3.class4{
+            background-color: pink;
+        }
+
+        .class3 .class5{
+            background-color: cornflowerblue;
+        }
+
+        header, article{
+            background-color: black;
+        }
+
+        [type=checkbox]{
+            width: 100px;
+            height: 100px;
+        }
+
+        [type=checkbox]:checked{
+            width: 70px;
+            height: 70px;
+        }
+
+        [type=radio]{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>A</div>
+    <hr/>
+    <div class="class1">B</div>
+    <hr/>
+    <div class="class1">C</div>
+    <hr/>
+    <div id="div1">D</div>
+    <hr/>
+    <div id = "div2">
+        <div>E</div>
+        <div class="class2">F</div>
+        <div>G</div>
+        <div>
+            <div class = "class2">H</div>
+        </div>
+    </div>
+    <hr/>
+    <div>I</div>
+    <hr/>
+    <hr/>
+    <p class="class3">J</p>
+    <p class="class3 class4">K</p>
+
+    <!-- p태그 안에 p태그는 일반적으로 들어가지 않는다. -->
+    <div class="class3">
+        L
+        <p class="class5">M</p>
+    </p>
+    <hr/>
+    <article>O</article>
+    <hr/>
+    <header>M</header>
+    <hr/>
+    <div >
+        <input type="checkbox"/>P
+        <input type="radio"/>R
+        <input type="checkbox" checked/>Q
+    </div>
+    <!-- <div1>content</div1> -->
+    <!-- <article class="class1">content</article> -->
+</body>
+</html>
