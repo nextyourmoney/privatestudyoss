@@ -16,13 +16,39 @@
     <style>
         #div0{
             display: flex;
-            flex-direction: row;
-            height: 150px;
+            /* flex-direction: row; */
+            flex-direction: column;
+            height: 800px;
+            /* width: 100px; */
+            background-color: aliceblue;
+            justify-content: center; /*진행 방향을 기준으로 위치 값 설정*/
+            align-items: flex-end; /* 배치 방향을 반대로 위치 지정   */
         }
 
-        #div0 > div{
+        /* #div0 > div{
             border: 1px solid red;
             flex-grow: 1;
+        } */
+
+        #div1{
+            background-color: aqua;
+           /* flex-grow: 1; /* 배치 방향 크기 성장 */
+            height: 150px; /*flex와 크기 지정 중 flex가 크기 선언에 우선권을 가진다*/
+            width: 100px;
+        }
+
+        #div2{
+            background-color: orange;
+            /* flex-grow: 1; */
+            height: 150px;
+            width: 100px;
+        }
+
+        #div3{
+            background-color: chartreuse;
+            /* flex-grow: 1; */
+            height: 150px;
+            width: 100px;
         }
     </style>
 
@@ -30,8 +56,8 @@
 <body>
     <div id="div0">
         <div id="div1">1</div>
-        <div id="div2">1</div>
-        <div id="div3">1</div>
+        <div id="div2">2</div>
+        <div id="div3">3</div>
     </div>
 </body>
 </html>
