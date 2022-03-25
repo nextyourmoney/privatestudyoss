@@ -348,6 +348,4 @@ public interface BoardDao {
 		
 		return row;
 	}*/
-
-	
 }

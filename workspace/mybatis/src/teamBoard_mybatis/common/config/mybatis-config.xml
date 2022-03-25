@@ -11,8 +11,8 @@
 	<!-- 타입 별명 설정 -->
 	<!-- 별칭 설정을 토해 코드의 길이를 줄일 수 있고 해당 별칭은 반드시 앞쪽에 와야한다.  -->
 	<typeAliases>
-		<typeAlias type = "dto.User" alias = "user"/>
-		<typeAlias type = "dto.Board" alias = "board"/>
+		<typeAlias type = "teamBoard_mybatis.common.dto.User" alias = "user"/>
+		<typeAlias type = "teamBoard_mybatis.common.dto.Board" alias = "board"/>
 		<typeAlias type = "dto.Pager" alias = "pager"/>
 	</typeAliases>
 
@@ -32,8 +32,9 @@
   <!-- xml(sql)위치 설정 -->
   <!-- mybatis는 sql이 작성 불가능 하기 때문에 개발자가 직접 작성을 해주고 맵핑을 통해 연결해줘야 한다. -->
   <mappers>
- 	<mapper resource="config/mapper/user.xml"/>
- 	<mapper resource="config/mapper/board.xml"/>
- 	<mapper resource="config/mapper/account.xml"/>
+ 	<mapper resource="teamBoard_mybatis/common/config/mapper/user.xml"/>
+ 	
+ 	<mapper resource="teamBoard_mybatis/common/config/mapper/board.xml"/>
+ 	<mapper resource="teamBoard_mybatis/common/config/mapper/account.xml"/>
   </mappers>
 </configuration>

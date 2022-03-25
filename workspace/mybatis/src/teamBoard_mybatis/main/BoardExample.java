@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 import org.apache.ibatis.session.SqlSession;
 
-import config.SqlSessionManager;
-import dao.UserDao;
+import teamBoard_mybatis.common.config.SqlSessionManager;
+import teamBoard_mybatis.common.dao.Userdao;
 import teamBoard_mybatis.common.dao.BoardDao;
 import teamBoard_mybatis.common.ConnectionManager;
 import teamBoard_mybatis.common.Service.BoardService;
@@ -87,8 +87,8 @@ public class BoardExample {
 					System.out.print("내용: ");
 					board.setBcontent(scanner.nextLine());
 					
-					System.out.print("작성자: ");
-					board.setBwriter(board.getBwriter());
+					//System.out.print("작성자: ");
+					board.setBwriter(user.getUserNickName());
 
 					System.out.print("게시판 카테고리: ");
 					board.setBcategoryid(scanner.nextInt());
