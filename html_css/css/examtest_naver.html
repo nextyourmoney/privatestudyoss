@@ -7,73 +7,76 @@
     <title>Document</title>
 
     <style>
-        #mainAdvertisement{
-            margin-left: 30px;
-        }
 
-        #topcontent{
-            border: 2px solid greenyellow;
+        #leftSection{
+            border: 1px solid black;
             float: left;
+            box-sizing: border-box;
+            width: 70%;
+            text-align: center;
+            height: 800px;
+            border: 10px auto;
         }
-        #bottomcontent{
-            border: 2px solid greenyellow;
+
+        #rightSection{
+            border: 1px solid black;
             float: left;
-
+            box-sizing: border-box;
+            width: 30%;
+            text-align: center;
+            height: 800px;
         }
 
+        .a1, .a2{
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+
+        section{
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        footer {
+            clear: both;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
+    
 </head>
 <body>
-    <div id=""> <!--광고판-->
-        <img src="../layout_images/01.png"/>
-    </div>
-    <section class="seaerchBoard">
-        <div>
-            <img src="../layout_images/02.png"/>
-        </div>
-        <div>
-            <img src="../layout_images/03.png"/>
-        </div>
-    </section>
-    <section id="topcontent"> <!--메인 광고판 및 언론사-->
-        <div id="mainAdvertisement">
-            <img src="../layout_images/04.png"/>
-        </div>
-        <div>
-            <img src="../layout_images/05.png"/>
-        </div>
-    </section>
-
-    <!--rightcontent-->
-    <section id="rightcontent">
-        <div>
-            <img src="../layout_images/07.png"/>
-        </div>
-        <div>
-            <img src="../layout_images/08.png"/>
-        </div>
-        <div>
-            <img src="../layout_images/09.png"/>
-        </div>
-        <div>
-            <img src="../layout_images/10.png"/>
-        </div>
-    </section>
-    
-
-    <section id="bottomcontent">  <!--하단 콘텐츠-->
-
-        <div>
-            <img src="../layout_images/06.png"/>
-        </div>
-        
-    </section>
-    
     <div>
-        <img src="../layout_images/11.png"/>
-    </div>
+        <section>
+            <img width="100%" src="/images/layout_images/01.png">
+        </section>
 
-    
-    
+        <header>
+            <img width="100%" src="/images/layout_images/02.png">
+        </header>
+
+        <section>
+            <nav><img src="/images/layout_images/03.png"></nav>
+
+            <section id="leftSection"> 
+                <article class="a1"><img src="/images/layout_images/04.png"></article>
+                <article class="a1"><img src="/images/layout_images/05.png"></article>
+                <article class="a1"><img src="/images/layout_images/06.png"></article>
+            </section>
+
+            <section id="rightSection">
+                <article class="a2"><img src="/images/layout_images/07.png"></article>
+                <article class="a2"><img src="/images/layout_images/08.png"></article>
+                <article class="a2"><img src="/images/layout_images/09.png"></article>
+                <article class="a2"><img src="/images/layout_images/10.png"></article>
+            </section>
+        </section>
+
+        <footer>
+            <img width="100%" src="/images/layout_images/11.png">
+        </footer>
+
+    </div>
 </body>
 </html>

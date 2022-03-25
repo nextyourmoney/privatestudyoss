@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        #wrapper{
+
+/*flex container : 크기가 변경 되는 것들이고 배치에서 row는 가로 column은 세로이다. 별도 선언을 하지 않으면 배치 방향은 row이다. */
+/*justify-content: style에서 jusfity-content:(center, flex-start, flex-end, column) 를 통해 명령 설정으로 배치되는ㄴ 방향을 기준으로 컨텐츠의 위치를 의미한다.     */
+/* align-items: 배치 방향의 반대방향에 대한 정렬 만약 진행 방향이 가로로 되어있는데 align-items의 위치가 center라면 세로를 기준으로 했을 때의 중앙에 위치하게 된다.   */       
+/* align-content: 크기가 다른 것들을 정렬한다. */
+/*flex-grow: (1,2,3,4....) 남은 빈 공간을 전부 해당 grow가 차지한다. 단 해당 숫자가 의미하는 것은 비율이다. */
+
+
+#wrapper{
             border: 1px solid black;
         }
         header{
