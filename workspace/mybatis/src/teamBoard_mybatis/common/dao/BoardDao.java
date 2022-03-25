@@ -11,19 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import teamBoard_mybatis.common.ConnectionManager;
 import teamBoard_mybatis.common.dto.Board;
 import teamBoard_mybatis.common.paging.Pager;
 
-public class BoardDao {
-	private Pager pager;
+
+
+@Mapper
+public interface BoardDao {
+	//private Pager pager;
 	
 	//리스트 목록 출력 - 리스트 보기
 	//bno로 받은 번호의 게시판을 출력한다.
 	
 		
 	//검색 //닉네임 검사, 제목검사로 구분해야한다.
-	public List<Board> SearchByList(String searchNum) {
+	/*public List<Board> SearchByList(String searchNum) {
 	      //BoardService에서 가져온 searchNum이 1이면 닉네임 검사, 2이면 제목검사를 시행한다.
 	      Connection conn=null;
 	      pager = new Pager(10, 5, getTotalRows(), 1); //페이지 분할 
@@ -103,88 +108,16 @@ public class BoardDao {
 	      
 	      
 	      
-	   }
+	   }*/
 
 	
 	//게시글 작성
-	public int write(String nickname) { //현재 로그인한 사용자의 아이디 비밀번호 값을 가져와야 한다. 합칠때 작업해야 할 
-		
-		int rows = 0; //성공여부 확인을 위한 정수
-		Scanner scanner = new Scanner(System.in);
-		
-		Board board = new Board();
-		System.out.print("글 제목: "); board.setBtitle(scanner.nextLine());
-		System.out.print("내용: "); board.setBcontent(scanner.nextLine());
-		System.out.print("첨부 파일 경로: "); board.setBfilepath(scanner.nextLine());
-		System.out.println("[1.자유게시판.    2.질문게시판.    3.학업게시판] ");
-		System.out.print("게시판 카테고리: "); board.setBcategoryid(scanner.nextInt());
-		
-		Connection conn = null;
-		//boolean run =false;
-		try {
-				//연결
-				conn = ConnectionManager.getConnection2();
-				
-				String sqlWriter = "select usernickname from users_team where userid = ?";
-				PreparedStatement pstmWriter = conn.prepareStatement(sqlWriter); //작성자를 가져오기 위해 user테이블의 닉테임 컬럼값을 가져온다.
-				pstmWriter.setString(1, nickname); //동작 테스트를 위하여 하드 코딩 진행 //수정 예정
-				
-				ResultSet rs = pstmWriter.executeQuery();
-		         
-		        if(rs.next()) {
-		        	//run=true;
-		        	board.setBwriter(rs.getString("usernickname"));
-		   
-		         }else {
-		        	 rows=-1;
-		         }
-		      //  if(run==true) {
-				System.out.println("RLdikdkdkdkdk");
-				String sql = "insert into boards_team (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata, bcategoryid)"
-						+ " values(seq_boards_team_bno.nextval, ?, ?, ?, sysdate, ?, ?, ?)";
-
-				PreparedStatement pstm = conn.prepareStatement(sql);				
-				
-				pstm.setString(1, board.getBtitle());
-				pstm.setString(2, board.getBcontent());
-				pstm.setString(3, board.getBwriter()); //현재 로그인한 아이디의 닉네임이 작성자로 자동으로 들어간다. ///수정예정
-				pstm.setInt(6, board.getBcategoryid());
-				
-				if(!board.getBfilepath().equals("")) {
-					File file = new File(board.getBfilepath());
-					pstm.setString(4, file.getName());
-					pstm.setBlob(5, new FileInputStream(board.getBfilepath()));
-					
-				} else {
-					pstm.setString(4,  null);
-					Blob blob = null;
-					pstm.setBlob(5,  blob);
-				}
-				
-				rows = pstm.executeUpdate(); //insert into가 되면 1이 반환된다.
-				
-				pstm.close();
-				pstmWriter.close();
-		        rs.close();
-
-		     //}
-				
-			}catch(ClassNotFoundException e) {
-				System.out.println("잘못된 입력 입니다 다시 입력해주세요");
-			}catch(Exception e) {
-				System.out.println("잘못된 입력 입니다 다시 입력해주세요");
-			} finally {
-				try 
-				{conn.close();}catch(Exception e) {}
-			}
-			
-		return rows;
-	}
+	public int write(Board board);
 	
 	//상세보
 	
 	//수정 - 게시물 수정
-	
+	/*
 	public int update(String selectUpdatestr) {
 
 		int selectUpdate =Integer.parseInt(selectUpdatestr);
@@ -414,7 +347,7 @@ public class BoardDao {
 	     }
 		
 		return row;
-	}
+	}*/
 
 	
 }

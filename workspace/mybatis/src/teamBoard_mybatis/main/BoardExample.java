@@ -3,6 +3,11 @@ package teamBoard_mybatis.main;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.ibatis.session.SqlSession;
+
+import config.SqlSessionManager;
+import dao.UserDao;
+import teamBoard_mybatis.common.dao.BoardDao;
 import teamBoard_mybatis.common.ConnectionManager;
 import teamBoard_mybatis.common.Service.BoardService;
 import teamBoard_mybatis.common.Service.CategoryService;
@@ -71,7 +76,39 @@ public class BoardExample {
 				searchList();
 				break;
 			case"3":
-				writeBoard();
+				
+				
+				try(SqlSession session = SqlSessionManager.getSqlSession()){
+					
+					Board board = new Board();
+					System.out.print("제목: ");
+					board.setBtitle(scanner.nextLine());
+					
+					System.out.print("내용: ");
+					board.setBcontent(scanner.nextLine());
+					
+					System.out.print("작성자: ");
+					board.setBwriter(board.getBwriter());
+
+					System.out.print("게시판 카테고리: ");
+					board.setBcategoryid(scanner.nextInt());
+					
+					
+					//방법#1
+					BoardDao boardDao = session.getMapper(BoardDao.class);
+					int rows = boardDao.write(board);
+					
+					
+					//방법#2
+					//int rows = session.insert("dao.BoardDao.write", board);
+					
+					System.out.println("넣은 숫자개수: " + rows);
+				
+					
+					
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case"4":
 				updateBoard();
