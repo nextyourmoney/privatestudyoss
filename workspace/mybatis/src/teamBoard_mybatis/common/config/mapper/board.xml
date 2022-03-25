@@ -4,7 +4,7 @@
 
 <!-- 실제 sqlrhk 맵퍼의 개채값과리턴값도 설정한다. -->
 <!--  id값은 메소드의 이름이다 -->
-<mapper namespace="dao.BoardDao">
+<mapper namespace="teamBoard_mybatis.common.dao.BoardDao">
 	<select id="selectBoard" parameterType="int" resultType = "dto.Board">
 		select bno, btitle, bcontent, bwriter, bdate
 		from boards
@@ -111,15 +111,16 @@
 	<!-- ***************************************************************** -->
 	
 	<!-- data insert -->
-	<insert id="insertBoard" parameterType="dto.Board">
+	<insert id="write" parameterType="teamBoard_mybatis.common.dto.Board">
 	
 		<!-- 하단의 insert 실행 전 selectkey부터 씰행하여 세팅을 한다.  -->
 		<selectKey keyProperty = "bno" resultType = "int" order = "BEFORE"> 
-			select seq_boards_bno.nextval from dual
+			select seq_boards_team_bno.nextval from dual
 		</selectKey>
+		
 		<!-- 하단의 bno는 위에서 지정정 된 bno이
 		 -->
- 		insert into boards (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata)
+ 		insert into boards_team (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata, bcategoryid)
 		values(
 			#{bno},
 			#{btitle},
@@ -127,7 +128,8 @@
 			#{bwriter},
 			sysdate,
 			null,
-			null
+			null,
+			#{bcategoryid}
 		)
 	</insert>
 	

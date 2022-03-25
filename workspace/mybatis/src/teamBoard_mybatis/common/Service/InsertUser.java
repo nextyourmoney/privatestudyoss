@@ -14,11 +14,11 @@ public class InsertUser {
 		try {
 			//연결하기
 			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@kosa1.iptime.org:50118/orcl", "java", "kosa12345");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@kosa1.iptime.org:50123/orcl", "java", "kosa12345");
 			System.out.println("연결 성공");
 			
 			//실행해야할 SQL 작성
-			String sql = "insert into users(userid,userpassword,usernickname,username,userage,userphonenumber,useremail) ";
+			String sql = "insert into users_team(userid,userpassword,usernickname,username,userage,userphonenumber,useremail) ";
 					sql+= "values(?,?,?,?,?,?,?)";
 			
 			//SQL을 실행할 PreparedStatment 얻기

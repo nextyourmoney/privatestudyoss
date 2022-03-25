@@ -5,13 +5,8 @@ public class programmers_level2_joystick {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Solution sol = new Solution();
-		System.out.println(sol.solution("JEROEN"));
-		
-		
+		System.out.println(sol.solution("JEROEN"));	
 	}
-	
-	
-
 }
 
 class Solution {
