@@ -76,6 +76,25 @@
 	
 	<!-- ***************************************************************** -->
 	
+	<select id="selectBoardwithUser2" parameterType = "int" resultMap = "selectBoardwithUserResultMap" >
+	select
+		bno, btitle, bwriter, bdate
+	from boards
+	where bcategoryid = #{bcategoryid}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<resultMap id = "selectBoardwithUser2ResultMap" type = "board">
 	<!-- Type = "dto.Board"도 가능 -->
 		<result column = "bno" property="bno"/>

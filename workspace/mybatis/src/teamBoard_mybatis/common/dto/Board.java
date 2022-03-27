@@ -15,14 +15,13 @@ public class Board {
 	private Date bdate;
 	private String bfilename;
 	private String bfilepath;
-	//private Blob Bfiledata;
 	private int bcategoryid;
 	private byte[]bfiledata;	
 	
 	
 	private User user;
 	private Category category;
-	private Friend friend;
+
 	
 	@Override
 	public String toString() {

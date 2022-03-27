@@ -2,21 +2,33 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 실제 sqlrhk 맵퍼의 개채값과리턴값도 설정한다. -->
-<!--  id값은 메소드의 이름이다 -->
+
 <mapper namespace="teamBoard_mybatis.common.dao.BoardDao">
-	<select id="selectBoard" parameterType="int" resultType = "dto.Board">
-		select bno, btitle, bcontent, bwriter, bdate
-		from boards
-		where bno = #{bno}
-		<!-- {bno}에는 무엇이 오든 상관 없다 -->
+	
+	
+	<!-- 카테고리 아이디별로 리스트 가져오기 -->
+	<select id="selectByname" parameterType="String" resultType = "board">
+		
+		select
+			btitle, bwriter, bdate
+		from boards_team
+		where bwriter = #{bwriter}
 	</select>
 	
-	<!--  기본적으로 반환되는 값이 list이다 그렇기때문에 개채타입 반환이 필요없다. -->
-	<select id="selectAll" resultType = "dto.Board">
-		select bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata
-		from boards
-		order by bno desc
+	<select id="selectBytitle" parameterType="String" resultType = "board">
+		
+		select
+			btitle, bwriter, bdate
+		from boards_team
+		where btitle = #{btitle}
+	</select>
+	
+	<select id="selectBoard" parameterType="int" resultType = "board">
+		
+		select
+			btitle, bwriter,bcontent, bcategoryid
+		from boards_team
+		where bno = #{bno}
 	</select>
 	
 	<select id="selectTotalRowCount" resultType="int">
@@ -45,56 +57,21 @@
 		
 	</select>
 	
-	<!-- 연 -->
-	<resultMap id = "selectBoardwithUserResultMap" type = "board">
-	<!-- Type = "dto.Board"도 가능 -->
-		<result column = "bno" property="bno"/>
-		<result column = "btitle" property="btitle"/>
-		<result column = "bcontent" property="bcontent"/>
-		<result column = "bwriter" property="bwriter"/>
-		<result column = "bdate" property="bdate"/>
-		<result column = "bfiledata" property="bfiledata"/>
-		<result column = "bfilename" property="bfilename"/>
-		
-		<association property="user" javaType="dto.User">
-			<result column = "userid" property="userId"/>
-			<result column = "username" property="userName"/>
-			<result column = "userpassword" property="userPassword"/>
-			<result column = "userage" property="userAge"/>
-			<result column = "useremail" property="userEmail"/>
-		
-		</association>
-	</resultMap>
 	
-	<select id="selectBoardwithUser" parameterType = "int" resultMap = "selectBoardwithUserResultMap" >
+	<select id="selectBoardwithUser" parameterType = "int" resultType = "teamBoard_mybatis.common.dto.Board">
 	select
-		bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata, 
-		userid, username, userpassword, userage, useremail
-	from boards b, users u
-	where b.bwriter = u.userid and b.bno = #{bno}
+		bno, btitle, bwriter, bdate
+	from boards_team
 	</select>
 	
 	<!-- ***************************************************************** -->
 	
-	<resultMap id = "selectBoardwithUser2ResultMap" type = "board">
-	<!-- Type = "dto.Board"도 가능 -->
-		<result column = "bno" property="bno"/>
-		<result column = "btitle" property="btitle"/>
-		<result column = "bcontent" property="bcontent"/>
-		<result column = "bwriter" property="bwriter"/>
-		<result column = "bdate" property="bdate"/>
-		<result column = "bfiledata" property="bfiledata"/>
-		<result column = "bfilename" property="bfilename"/>
-		<association property = "user" javaType = "dto.User" column = "bwriter" select = "dao.UserDao.selectUser"/>
-		<!-- association은 추가 실행이다. -->
-	</resultMap>
-	
 	<!-- user.xml과 연결된다. -->
-	<select id="selectBoardwithUser2" parameterType = "int" resultMap = "selectBoardwithUser2ResultMap" >
+	<select id="selectBoardwithUser2" parameterType = "int" resultType = "teamBoard_mybatis.common.dto.Board" >
 		select
-			bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata
-		from boards
-		where bno = #{bno}
+			bno, btitle, bwriter, bdate
+		from boards_team
+		where bcategoryid = #{bcategoryid}
 	</select>
 	
 	<!-- ***************************************************************** -->
@@ -137,9 +114,11 @@
 	<!-- ***************************************************************** -->
 	
 	<update id="updateBoard" parameterType = "board">
-		update boards set
+		update boards_team 
+		set
 			btitle = #{btitle},
-			bcontent = #{bcontent}
+			bcontent = #{bcontent},
+			bcategoryid = #{bcategoryid}
 		where bno = #{bno}
 	
 	</update>
@@ -147,7 +126,7 @@
 	<!-- ***************************************************************** -->
 	
 	<delete id="deleteBoard" parameterType = "int">
-		delete from boards where bno=#{bno}
+		delete from boards_team where bno=#{bno}
 	
 	</delete>
 	
