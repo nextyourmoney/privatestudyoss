@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import teamBoard_mybatis.common.dao.CategoryDao;
+import teamBoard_mybatis.common.dao.BoardDao;
 import teamBoard_mybatis.common.dto.Board;
-import teamBoard_mybatis.common.paging.Pager;
+
 
 public class CategoryService {
 	private CategoryDao categoryDao = new CategoryDao();
-	private Pager pager;
+
 	private Scanner scanner;
 	int totalRow = 0;
 	
@@ -18,110 +19,12 @@ public class CategoryService {
 	}
 	
 
-	//카테고리 아이디로 카테고리별 리스트 가져오기
-	public void getCategoryList(Pager pager, int categoryid) throws Exception {
-
-		boolean run = true;
-		while (run) {
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.println("번호\t작성자\t\t제목\t\t시간");
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			
-			List<Board> list = categoryDao.selectByCategory(pager, categoryid);
-
-			for (Board b : list) {
-				System.out.print(b.getBno() + "\t");
-				System.out.print(b.getBwriter() + "\t");
-				System.out.print(b.getBtitle() + "\t");
-				System.out.print(b.getBdate() + "\t");
-				System.out.println();
-			}
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			
-			System.out.print("[First]");
-			System.out.print((pager.getGroupNo() >= 2)?"[Prev] " : " ");
-			for(int i=pager.getStartPageNo(); i<=pager.getEndPageNo(); i++) {
-				if(i == pager.getPageNo()) {
-					System.out.print("(" + i + ")" + ((i != pager.getEndPageNo())?", ":""));
-				} else {
-					System.out.print(i + ((i != pager.getEndPageNo())?", ":""));
-				}
-			}
-			System.out.print((pager.getGroupNo() < pager.getTotalGroupNo())?" [Next]" : " ");
-			System.out.println("[Last]");
-			
-			System.out.print("선택: ");
-			String select = scanner.nextLine();
-			if (select.equals("f") || select.equals("F")) {
-				pager = getFirstPage(pager);
-			} else if (select.equals("p") || select.equals("P")) {
-				pager = getPrevGroup(pager);
-			} else if (select.equals("n") || select.equals("N")) {
-				pager = getNextGroup(pager);
-			} else if (select.equals("l") || select.equals("L")) {
-				pager = getLast(pager);
-			} else if (select.equals("q") || select.equals("Q")) {
-				run = false;
-			} else {
-				pager = getPage(Integer.parseInt(select), pager);
-			}
-		}
-	}
-
 	//카테고리별 게시물 개수 가져오기
 	public int getTotalCategoryBoardNum(int categoryid) throws Exception {
 		this.totalRow = categoryDao.count(categoryid);
 		return categoryDao.count(categoryid);
 	}
 	
-	//전체 게시물 가져오기
-	public void getAllList(Pager pager) throws Exception {
-		boolean run = true;
-		while (run) {
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.println("번호\t작성자\t\t제목\t\t시간");
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			
-			List<Board> list = categoryDao.selectAll(pager);
-
-			for (Board b : list) {
-				System.out.print(b.getBno() + "\t");
-				System.out.print(b.getBwriter() + "\t");
-				System.out.print(b.getBtitle() + "\t");
-				System.out.print(b.getBdate() + "\t");
-				System.out.println();
-			}
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			
-			System.out.print("[First]");
-			System.out.print((pager.getGroupNo() >= 2)?"[Prev] " : " ");
-			for(int i=pager.getStartPageNo(); i<=pager.getEndPageNo(); i++) {
-				if(i == pager.getPageNo()) {
-					System.out.print("(" + i + ")" + ((i != pager.getEndPageNo())?", ":""));
-				} else {
-					System.out.print(i + ((i != pager.getEndPageNo())?", ":""));
-				}
-			}
-			System.out.print((pager.getGroupNo() < pager.getTotalGroupNo())?" [Next]" : " ");
-			System.out.println("[Last]");
-			
-			System.out.print("선택: ");
-			String select = scanner.nextLine();
-			if (select.equals("f") || select.equals("F")) {
-				pager = getFirstPage(pager);
-			} else if (select.equals("p") || select.equals("P")) {
-				pager = getPrevGroup(pager);
-			} else if (select.equals("n") || select.equals("N")) {
-				pager = getNextGroup(pager);
-			} else if (select.equals("l") || select.equals("L")) {
-				pager = getLast(pager);
-			} else if (select.equals("q") || select.equals("Q")) {
-				run = false;
-			} else {
-				pager = getPage(Integer.parseInt(select), pager);
-			}
-		}
-	}
 
 	//전체 게시물 개수 가져오기
 	public int getTotalBoardNum() throws Exception {
@@ -129,22 +32,5 @@ public class CategoryService {
 		return categoryDao.countAll();
 	}
 	
-	//페이징과 관련된 함수들
-	private Pager getFirstPage(Pager pager) throws Exception {
-		return pager = new Pager(10, 5, this.totalRow, 1);
-	}
-
-	private Pager getPrevGroup(Pager pager) throws Exception {
-		return pager = new Pager(10, 5, this.totalRow, pager.getStartPageNo() - 1);
-	}
-	private Pager getPage(int pageNo, Pager pager) throws Exception {
-		return pager = new Pager(10, 5, this.totalRow, pageNo);
-	}
-	private Pager getNextGroup(Pager pager) throws Exception {
-		return pager = new Pager(10, 5, this.totalRow, pager.getEndPageNo() + 1);
-	}
-	private Pager getLast(Pager pager) throws Exception {
-		return pager = new Pager(10, 5, this.totalRow, pager.getTotalPageNo());
-	}
 
 }
