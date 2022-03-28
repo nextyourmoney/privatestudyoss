@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script>
+        //산술 연산자
+        let var1 = 2**3;
+        console.log("var1: " + var1)
+
+        //비교 연산자
+        let var2 = 10;
+        let var3 = "10";
+        console.log(var2 == var3);
+        console.log(var2 === var3);
+        console.log(var2 != var3); //값 일치 여부 확인 //타입이 다르기 때문에 자동으로 string으로 변환되기 때문에 같은 값으로 인식하고 false반환
+        console.log(var2 !== var3); //값의 일치 여부 확인 //타입이 다르기 때문에 true 반환
+
+        //논리 연산자
+        var var4 = true;
+        var var5 = false;
+        console.log(var4 && var5);
+        console.log(var4 || var5);
+        
+        let var6 = var4 && "홍길동"; //var4가 true이면 홍길동을 var6에 넣는다.
+        let var7 = var5 && "홍길동"; //var5는 false이므로 작업이 진행되지 않는다. 
+        //위와 같은 방식들은 서로 타입은 다른데 이 때 앞에 있는 값이 true면 진행, false면 반환된다.
+
+        let var8 = var4 || "홍길동"; //true면 true가 반환되고
+        let var9 = var5 || "홍길동"; //false면 홍길동이 리턴된다.
+    </script>
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            Operation(연산자)
+        </div>
+
+        <div class="card-body">
+
+        </div>
+    </div>
+</body>
+</html>
