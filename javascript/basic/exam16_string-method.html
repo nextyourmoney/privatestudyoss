@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            String Method
+        </div>
+
+        <div class="card-body">
+            <form action="http://tomcat.apache.org" onsubmit="checkFormData()">
+                <div class="form-group">
+                    <label for="ssn"> 주민번호</label>
+                    <input type="text" class="form-control" id="ssn" value="123456-1234567">
+                    <small id="ssnHelp" class="form-text text-muted"> 13글자를 -포함 입력</small>
+                </div>
+                <button type="submit" class="btn btn-primary">가입</button>
+            </form>
+
+        </div>
+
+        <script>
+            function checkFormData(){
+                event.preventDefault();
+
+                let ssnInput = document.getElementById("ssn");
+                let ssn = ssnInput.value;
+
+                //남자인지 여자인지 조사
+                let sex = ssn.charAt(6);
+                if(sex == "1" || sex == "3"){
+                    console.log("남자");
+                } else{
+                    console.log("여자");
+                }
+
+                //분리하기
+                const arr = ssn.split("-");
+                console.log(arr);
+
+                //잘라내기
+                let ssnfirst = ssn.substr(0,6); //개수로 자르기
+                let ssnsecond = ssn.substring(0,6); //인덱스로 잘라내기
+            }
+
+        </script>
+    </div>
+</body>
+</html>

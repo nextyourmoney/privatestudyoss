@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+
+    <script>
+        //생성자 정의
+        function Car(name, price){
+            this.name = name;
+            this.price = price;
+            this.start = function(){  //메소드가 되기 위해서는 함수 지정이 되어야 한다.
+                console.log(this.name + "를 시동한다");
+            };
+        }
+
+        //생성자를 호출해서 객체(인스턴스) 생성
+        let myCar = new Car("포르쉐", 200000000);
+        console.log(myCar.name, myCar.price);
+        myCar.start();
+
+        //생성자를 호출해서 다른 객체(인스턴스) 생성
+        let yourCar = new Car("벤츠", 1500000000);
+        console.log(yourCar.name,yourCar.price);
+        yourCar.start();
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+
+        <div class="card-body">
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+   
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            버튼 클릭 이벤트 처리
+        </div>
+
+        <div class="card-body">
+            <!-- 아래의 코드는 모두 같은 코드이다. -->
+            <button onclick="handleBtn1('photo5.jpg')" class="btn btn-info btn-sm"> 버튼</button>
+            <a href="javascript:handleBtn1('photo6.jpg')" class="btn btn-info btn-sm"> 버튼1 </a>
+            <hr/>
+            <div id="content1"> </div>
+        </div>
+
+        <script>
+            function handleBtn1(){
+                console.log("handleBtn1 runnig...");
+                const content1 = document.getElementById("content1");
+                content1.innerHTML = "<img src='/images/photo5.jpg' width = '100px'/>";//div id="content1"의 태그 안쪽에 html문을 넣겠다는 의미이다.  
+            }
+        </script>
+
+    </div>
+
+    <div class="carrd m-2">
+        <div class="card-header">
+            event target and value
+        </div>
+
+        <div class="card-body">
+            <!-- 아래의 script에서 처럼 사용될때는 엘리먼트나 태그가 아닌 하나의 객체로서 생각하여야 한다.  -->
+            <input id="input1" type="text" onkeyup="handleInput()"/> 
+            
+            <hr/>
+            <div id="content2"> </div>
+        </div>
+
+        <script>
+            function handleInput(){
+                console.log("handleInput runngin...");
+                const input = document.getElementById("input1"); //위의 input1을 가져온다. 참조한다
+                //console.log(input.value); //사용자가 입력한 내용을 가져온다.
+                const content2 = document.getElementById("content2"); //위에 선언된 content2를 가져온다 즉 참조한다.
+                content2.innerHTML = input1.value; //content2에서 사용되는 innerhtml은 메소드로서 활용되는 것이다. 
+            }
+        </script>
+    </div>
+
+    <div class="carrd m-2">
+        <div class="card-header">
+            Event info
+        </div>
+
+        <div class="card-body">
+            <input id="input2" type="text" onkeyup="handleEventInfo()"/> 
+            
+            <hr/>
+            <div id="content3"> </div>
+        </div>
+
+        <script>
+            function handleEventInfo(){
+                console.log(event); //내장 변수 event를 통해 정보 조회
+                console.log(event.target); //target은 이벤트가 발생한 객체를 참조한다. 
+
+                const content3 = document.getElementById("content3"); 
+                content2.innerHTML = event.target.value; //객체를 참조하게 됨으로 해당 객체의 값을 사용 할 수 있다.
+            }
+        </script>
+    </div>
+
+    <div class="carrd m-2">
+        <div class="card-header">
+            Mouse Event
+        </div>
+
+        <div class="card-body">
+            <div>
+                <div style="width: 100px; height: 100px;" 
+                onmouseenter="handleMouseEnter()"
+                onmouseleave="handleMouseLeave()">
+                    <img src="/images/photo1.jpg" width="100px" height="100px"/>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function handleMouseEnter(){
+                event.target.innerHTML = ' <img src="/images/photo2.jpg" width="100px" height="100px"/>';
+
+            }
+
+            function handleMouseLeave(){
+                event.target.innerHTML = ' <img src="/images/photo1.jpg" width="100px" height="100px"/>';
+
+            }
+        </script>
+    </div>
+
+    <div class="carrd m-2">
+        <div class="card-header">
+            ㄷEvent PeventDefault
+        </div>
+
+        <div class="card-body">
+            <!-- <div>
+               <a onclick="handlePreventDefault1()" href = "https://www.acmicpc.net/problem/2108"> 주소</a>
+            </div> -->
+
+            <form action="https://www.acmicpc.net/problem/2108" onsubmit="handlePreventDefault1()"> 
+                <input type="submit" value="제출" class="btn btn-info btn-sm"/>
+            </form>
+        </div>
+
+        <script>
+            // function handlePreventDefault1(){
+            //     // event.preventDefault(); //이벤트 동작을 막는다.
+            //     // console.log("handlePreventDefault1() running...");
+            //     //return false;
+
+            //     let status = confirm();
+            //     // onsubmit을 통해서 넘어온 값의 유효성을 검사하고 문제가 있으면 링크를 거절한다.
+            //     if(!status){
+            //         event.preventDefault();
+            //     }
+            // }
+                function handlePreventDefault2(){
+                    event.preventDefault(); //미리 연결을 막아두었다가 
+
+                    let status = confirm();
+                    if(status){
+                        event.target.submit(); //연결이 되었을 때 정상 실행 위의 type="submit"을 실행시킨다.
+                    } 
+                }
+        </script>
+</body>
+</html>
