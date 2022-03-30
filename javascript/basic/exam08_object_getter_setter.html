@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script>
+        const myCar = {
+            //필드
+            name: "그랜저",
+            price: 5000000,
+            speed: 100,
+
+            //메소드
+            start(){
+                console.log("tlehd");
+            },
+
+            //getter, setter (방법 1)
+            getkmSpeed(){
+                let result = this.speed * 0.621371;
+                return result;
+            },
+
+            setkmSpedd(value){
+                let result = value / 0.621371;
+                this.speed = result;
+            },
+
+            //getter, setter (방법2)
+            get kmSpeed(){
+                let result = this.speed * 0.621371;
+                return result;
+            },
+
+            set kmSpeed(Value){ //get의 명과 같아야 한다.
+                let result = Value / 0.621371;
+                this.speed = result;
+            }
+        }; //여기서 ;는 변수의 값으로 사용한다는 의미이다.
+
+        //객체 사용 방법2
+        console.log(myCar.speed);
+        console.log(myCar.kmSpeed);
+        console.log(myCar.getkmSpeed());
+
+        myCar.speed = 200;
+        myCar.kmSpeed = 50; //setter의 value로 들어가 계산이 된다.
+        console.log(myCar.kmSpeed);
+        myCar.setkmSpedd(50);
+        
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            Object Geeter & Setter
+        </div>
+
+        <div class="card-body">
+
+        </div>
+    </div>
+</body>
+</html>

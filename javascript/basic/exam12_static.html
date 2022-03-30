@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script>
+        class Car{
+            //정적 필드 선언
+            static company = "삼성르노";
+
+
+            //생성자 선언 & 인스턴스 필드 선언
+            constructor(name="sm7", color="red"){
+                this.name = name;
+                this.color = color;
+            }
+
+            //인스턴 메소드
+            start(){
+                console.log("시동");
+            }
+
+            //정적 메소드는 클래스로 접근한다.
+            static info(){
+                console.log("제작 회사: " + Car.company)
+            }
+        }
+
+        //정적 멤버 사용
+        console.log(Car.company);
+        Car.info();
+
+        //인스턴스 멤버 사용
+        let myCar = new Car();
+        console.log(myCar.name, myCar.color);
+        myCar.start();
+        
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+
+        <div class="card-body">
+
+        </div>
+    </div>
+</body>
+</html>

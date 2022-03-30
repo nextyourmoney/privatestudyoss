@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script>
+        function fun1(){
+            console.log("1");
+            console.log("2");
+            console.log("3");
+        }
+
+        //함수 호출
+        fun1();
+
+
+        //함수 호출
+        var result1 = fun2(3, 5) //본래는 순서대로 진행되어서 함수 인식을 하지 못하였지만, 최근에는 정의된 부분으로 이동하여 사용이 가능하도록 되었다.
+        console.log("result: " + result1); 
+        
+        //매개변수로 변수 값만 선언한다. //함수 선언
+        function fun2(x, y){
+            console.log("x: " + x);
+            console.log("y: " + y);
+            let result = x + y;
+            return result;
+        }
+
+         //함수 호출
+        var result1 = fun2(3, 5) 
+        console.log("result: " + result1); 
+
+        //함수 선언
+        function fun3(x, y = 0){ //y값이 주어지면 0을 디폴트로 사용하겠다.
+            console.log("x: " + x);
+            console.log("y: " + y);
+            let result = x + y;
+            return result;
+        }
+
+        //함수 사용
+        let result2 = fun3(3);
+        let result3 = fun3(3, 5);
+
+        //함수 선언  //이름 없는 함수도 사용이 가능하다.
+        let fun4 = function(x, y){
+            console.log("x: " + x);
+            console.log("y: " + y);
+            let result = x + y;
+            return result;
+        }
+
+        let result4 = fun4(10, 20)
+
+        //화살표 함수 선언
+        let fun5 = () => {
+            console.log("A");
+            console.log("B");
+            
+        }
+        fun5();
+
+        //화살표 함수 선언2
+        let fun6 = (x) => {
+            let result = x**2;
+            return result;
+        }
+
+        //함수 호출
+        let result5 = fun6(10);
+
+        //화살표 함수 호출
+        let result6 = fun7(10);
+
+        //화살표 함수 선언2
+        let fun8 = x =>  x**2; //return문이 하나 뿐이라면 모두 생략하고 리턴 과정만 선언이 가능하다.
+        
+
+        //함수 호출
+        let result8 = fun9(10);
+        console.log("result8L " + result8);
+        console.log("");
+
+        //함수 선언
+        let fun10 = (x, y) => x * y; //매게 변수가 복수라면 괄호 생략은 불가능하다. 대신 retunr의 중괄호는 생략 가능.
+
+        let result9 = fun1-(10, 20);
+        console.log("result9: " + result9);
+        console.log("");
+
+        //함수 선언
+        let fun11 = () => {
+            console.log("hello");
+        }
+
+        //함수 호출
+        fun11(); //리턴 값이 없기 때문에 바로 호출 가능
+        console.log("");
+
+        //함수 호출
+        let fun12 = () => console.log("heollo");
+        //함수 호출
+        fun12();
+        console.log("");
+
+        //함수 선언
+        let fun13 = () => {
+            return {name: "홍킬동", age: 15};
+        }
+
+        let result10 = fun13();
+        console.log(result10); //json이 그대로 나온다.
+
+
+
+ 
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            Function(함수)
+        </div>
+
+        <div class="card-body">
+            <button onclick="fun1()" class="btn btn-info"> fun1() 호출</button>
+            <a href="javascript:fun1()" class="btn btn-success">fun1() 호출</a>
+
+            <hr/>
+
+            <a href="javascript:fun2(3, 5)" class="btn btn-info"></a> fun2() 호출 </a>
+
+            <hr/>
+
+            <button onclick="fun5()" class="btn btn-info"> fun1() 호출</button>
+            <a href="javascript:fun5()" class="btn btn-success">fun1() 호출</a>
+        </div>
+    </div>
+</body>
+</html>
