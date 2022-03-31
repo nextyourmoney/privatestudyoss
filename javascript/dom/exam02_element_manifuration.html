@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            Element Manipulation(조작)
+        </div>
+
+        <div class="card-body">
+            <!-- info는 색상임 -->
+            <a href="javascript:changeContent()" class="btn btn-info btn-sm">변경</a>
+            <a href="javascript:appendContent()" class="btn btn-info btn-sm">추가</a>
+            <a href="javascript:deleteContent()" class="btn btn-info btn-sm">삭제</a>
+            <hr/>
+            <div id = "result1"></div>
+        </div>
+
+        <script>
+            function changeContent(){
+                let result1 = document.querySelector("#result1");
+
+                //방법1
+                //result1.innerHTML = `<img src="/images/photo2.jpg" width = "100px" height = "100px"/>`
+
+                //모든 자식 객체 제거
+                //result1.childNodes.forEach(child => result1.removeChild(child)); //이 코드는 index가 일치하지 않아 에러 발생
+                while(result1.hasChildNodes()){
+                    result1.removeChild(result1.lastElementChild); //자식 객체 중 마지막 자식 객체를 삭제한다. 
+                }
+
+                //방법2
+                let img = document.createElement("img");
+                img.setAttribute("src", "/images/photo3.jpg"); //속성 설정
+                img.setAttribute("width", "100px"); //속성 설정
+                
+
+                //자식 객체 추가
+                result1.appendChild(img) //result1 div에 img라는 태그를 자식으로 새로이 삽입한다
+
+            }
+            function appendContent(){
+                let result1 = document.querySelector("#result1");
+
+                //방법1
+                //result1.innerHTML += `<img src="/images/photo2.jpg" width = "100px" height = "100px"/>`
+
+                //방법2
+                let img = document.createElement("img");
+                img.setAttribute("src", "/images/photo2.jpg"); //속성 설정
+                img.setAttribute("width", "100px"); //속성 설정
+                result1.appendChild(img);
+            }
+
+            function deleteContent(){
+                let result1 = document.querySelector("#result1");
+                //방법1
+                //result1.innerHTML = "";
+
+                while(result1.hasChildNodes()){
+                    result1.removeChild(result1.lastElementChild); //자식 객체 중 마지막 자식 객체를 삭제한다. 
+
+                }
+            }
+        </script>
+    </div>
+
+    <div class="card">
+        <div class = "card-header">
+            Element Manipulation - 스타일 변경
+        </div>
+
+        <div class="card-body">
+            <button onclick = "changeSize()" class="btn btn-info btn-sm"> 스타일 조정</button>
+            <hr/>
+            
+            <!-- <img id = "img1" src="/images/photo2.jpg" 
+                style="border-radius: 50px; border-width: 5px; border-color: red; border-style: solid;"/> 아래의 스타일 변경1과 같다. -->
+                <img id = "img1" src="/images/photo2.jpg"/>
+                <hr/>
+        </div>
+
+        <script>
+            function changeSize(){
+                let img1 = document.querySelector("#img1");
+                
+                //스타일 변경1
+                img1.style.width = "200px";
+                img1.style.height = "200px";
+                img1.style.borderRadius = "100px";
+                img1.style.borderwidth = "5px";
+                img1.style.borderColor = "chartreuse";
+                img1.style.borderStyle = "solid";
+
+            }
+        </script>
+    </div>
+
+    <div class="card">
+        <div class = "card-header">
+            Element Manipulation - 속성값 변경
+        </div>
+
+        <div class="card-body">
+            <button onclick = "changeSize()" class="btn btn-info btn-sm"> 속성 조정</button>
+            <hr/>
+            <img id="img2" src="/images/photo4.jpg" class="border" width="100" height="100"/>
+        </div>
+
+        <script>
+            function changeSize(){
+                let img2 = document.querySelector("#img2");
+                img2.setAttribute("src", "/images/photo5.jpg");
+                img2.setAttribute("class", "rounded-circle");
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -46,8 +46,10 @@
     </div>
 
     <div class="card-body" style="border: 2px solid darkblue;">
-        <div id = "comment2" class="m-2 " style="height: 150px; display: flex; justify-content: center; align-items: center;;
-            color: white; font-size: 4vw; font-size: 7vh; background-color: black;"> 00:00:00:000 </div>
+        <div id = "comment2" class="m-2 " style="height: 150px; display: flex; justify-content: center; align-items: center;
+            color: white; font-size: 4vw; font-size: 7vh; background-color: black;"> 00:00:00:000
+           
+        </div>
         <button onclick="startstopwatch()" class="btn btn-info btn-sm m-2" style="background-color:green; width: 7%;">시작</button>
         <button onclick="endstopwatch()" class="btn btn-info btn-sm m-2" style="background-color: red; width: 7%;">중지</button>
     </div>
@@ -62,40 +64,40 @@
         }
 
         function update() {
-        end = new Date();
-        var s = end - begin;
+            end = new Date();
+            var s = end - begin;
 
-        var ms = s % 1000;
-        s = (s - ms) / 1000;
-        var secs = s % 60;
-        s = (s - secs) / 60;
-        var mins = s % 60;
-        var hrs = (s - mins) / 60;
+            var ms = s % 1000;
+            s = (s - ms) / 1000;
+            var secs = s % 60;
+            s = (s - secs) / 60;
+            var mins = s % 60;
+            var hrs = (s - mins) / 60;
 
-        if(ms<10){
-            ms = `00${ms}`
-        } else if(ms < 100){
-            ms = `0${ms}`
-        } 
+            if(ms<10){
+                ms = `00${ms}`
+            } else if(ms < 100){
+                ms = `0${ms}`
+            } 
 
-        if( secs >= 60){
-            secs = secs % 60;
-        }
-        
-        if(secs < 10){
-            secs = `0${secs}`;
-        }
+            if( secs >= 60){
+                secs = secs % 60;
+            }
+            
+            if(secs < 10){
+                secs = `0${secs}`;
+            }
 
-       if(mins < 10){
-            mins = `0${mins}`;
-        }
+            if(mins < 10){
+                mins = `0${mins}`;
+            }
 
-        if(hrs < 10){
-            hrs = `0${hrs}`;
-        }
-        
-        var result = `${hrs}:${mins}:${secs}:${ms}`
-        document.getElementById("comment2").innerHTML = result;
+            if(hrs < 10){
+                hrs = `0${hrs}`;
+            }
+            
+            var result = `${hrs}:${mins}:${secs}:${ms}`
+            document.getElementById("comment2").innerHTML = result;
 
         }
 
