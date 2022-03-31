@@ -10,29 +10,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
     <script>
-        const now = new Date(); //객체 선언
-        //toLocalString은 날짜와 시간이 조회되며, DateString은 날짜가 조회, TimeString은 시간이 조회된다.
-        console.log("today: ", now,"1", now.toLocaleString, now.toLocaleDateString(), now.toLocaleTimeString());
+        //json 객체 표기법
+        let strObj = '{"bno":1, "btitle":"제목1", "writer":"홍킬동"}';
 
-        //각 상세 날짜 조회
-        console.log("year: ", now.getFullYear());
-        console.log("month:", now.getMonth() + 1);
-        console.log("date:", now.getDate());
-        console.log("day:", now.getDay());
-        console.log("hour:", now.getHours());
-        console.log("minute:", now.getMinutes());
-        console.log("second:", now.getSeconds());
+        //json 배열 표기법
+        let strArr = '[10, "홍킬동", true, null]';
 
+        //json -> javascript 객체 또는 배열
+        let obj = JSON.parse(strObj);
+
+        let arr = JSON.parse(strArr);
+        console.log(arr);
+
+        //javascript 객체 또는 배열 -> json
+        let strObj2 = JSON.stringify(obj);
+        
+        let strArr2 = JSON.stringify(arr);
+
+
+        //객체 배열 -> JSON
+        const arr = [
+                    {bno: 1, title: "title1", writer: "홍길동1"},
+                    {bno: 2, title: "title2", writer: "홍길동2"},
+                    {bno: 3, title: "title3", writer: "홍길3"},
+                    {bno: 4, title: "title4", writer: "홍길동4"}
+                ];
+        let jsonBoardList = JSON.stringify(arr);
+
+        //JSON -> 객체 배열
+        let boardList = JSON.stringify(jsonBoardList);
+
+        
     </script>
 </head>
 <body>
     <div class="card">
         <div class="card-header">
-            html 날짜 정보
+
         </div>
 
         <div class="card-body">
-            
+
         </div>
     </div>
 </body>

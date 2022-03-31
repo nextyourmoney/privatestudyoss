@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+            integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            function basic() {
+                //배열 기본
+                const arr1 = ["java", "javascritp", "vue"];
+                arr1[0] = "Spring";
+                console.log(arr1.length);
+
+                //방법1
+                for (let item of arr1) {
+                    console.log(item);
+                }
+
+                //방법2
+                for (let i = 0; i < arr1.length; i++) {
+                    console.log(arr[i]);
+                }
+            }
+
+            function addNewItem() {
+                //자바 스트립트의 배열은 크기 선언을 하지 않아도 되는데 이는 자바의 리스트와 유사하다.
+                const arr = [];
+
+                //push를 통해 마지막에 값을 추가한다.
+                arr.push("html1");
+                arr.push("css");
+
+                for (let item of arr) {
+                    console.log(item);
+                }
+            }
+
+            function removeAndInsertItem() {
+                const arr = ["Bananan", "orange", "apple", "mango"];
+
+                //항목 삭제
+                //arr.splice(2,1); //2번째 인덱스부터 1개를 삭제
+                //console.log(arr);
+
+                //항목 삽입
+                arr.splice(2, 0, "Lemon"); //0을 줌으로써 삭제하지 않고 해당 위치에 삽입한다.
+                console.log(arr);
+            }
+
+            //배열 합치기
+            function concatArray() {
+                const arr1 = ["Bananan", "orange", "apple", "mango"];
+                const arr2 = ["OLI", "Kronu", "zeta", "kovalskia"];
+                const arr3 = arr1.concat(arr2); //["Bananan", "orange", "apple", "mango", "OLI", "Kronu", "zeta", "kovalskia"]; 형태의 합쳐진 새로운 배열 탄생
+            }
+
+            //배열 필터링
+            function filterItem() {
+                const arr1 = [1, 2, 3, 4, 5];
+                const arr2 = arr1.filter((item) => item % 2 === 0); //람다식의 방식ㅇ르 사용한 짝수 값의 경우만 item으로 설정한다.
+                const arr3 = arr1.filter(function (item) {
+                    return item % 2 === 0;
+                });
+                console.log(arr3);
+
+                const arr4 = [
+                    {bno: 1, title: "title1", writer: "홍길동1"},
+                    {bno: 2, title: "title2", writer: "홍길동2"},
+                    {bno: 3, title: "title3", writer: "홍길3"},
+                    {bno: 4, title: "title4", writer: "홍길동4"}
+                ];
+
+                const arr5 = arr4.filter((item) => item.writer === "홍길동4")
+                console.log(arr5);
+            }
+
+            //항목 찾기
+            function searchItem(){
+                const arr4 = [
+                    {bno: 1, title: "title1", writer: "홍길동1"},
+                    {bno: 2, title: "title2", writer: "홍길동2"},
+                    {bno: 3, title: "title3", writer: "홍길3"},
+                    {bno: 4, title: "title4", writer: "홍길동4"}
+                ];
+
+                let board = arr4.find(item => item.bno === 3);
+                console.log(board);
+
+                let index = arr.findIndex(item => item.bno === 3);
+                console.log(index);
+            }
+
+            //항목 일괄 처리
+            function handleEachItem(){
+                const arr4 = [
+                    {bno: 1, title: "title1", writer: "홍길동1"},
+                    {bno: 2, title: "title2", writer: "홍길동2"},
+                    {bno: 3, title: "title3", writer: "홍길3"},
+                    {bno: 4, title: "title4", writer: "홍길동4"}
+                ];
+
+                for(let i = 0; i < arr.length; i++){
+                    console.log(arr[i]);
+                }
+
+                for(let board of arr){
+                    console.log(board);
+                }
+
+                array.forEach(board => {
+                    for(let filedName in board){
+                        console.log(`${filedName}:`, board[filedName]);
+                    }
+                    console.log("");
+                });
+            }
+
+            function mapItem(){
+                const arr1 = [1,2,3,4,5];
+                const arr2 = arr1.map((item) => item*10);
+
+                const arr = [
+                    {bno: 1, title: "title1", writer: "홍길동1"},
+                    {bno: 2, title: "title2", writer: "홍길동2"},
+                    {bno: 3, title: "title3", writer: "홍길3"},
+                    {bno: 4, title: "title4", writer: "홍길동4"}
+                ];
+
+                //가져오기
+                const arr4 = arr.map(item => item.title);
+                console.log(arr4);
+                
+                //값을 재정의 한다. 
+                const arr5 = arr3.map(item => ({...item, writer:"홍길동", date: new Date().toLocaleString()}));
+            }
+
+            function sortItem(){
+                const arr1 = [1,2,3,4,5];
+                arr1.sort(); //오름차순 정력
+
+                arr1.reverse(); //내림 차순 정렬
+
+                const arr = [
+                    {bno: 1, title: "title1", writer: "홍길동1"},
+                    {bno: 2, title: "title2", writer: "홍길동2"},
+                    {bno: 3, title: "title3", writer: "홍길3"},
+                    {bno: 4, title: "title4", writer: "홍길동4"}
+                ];
+                //올림차순 정렬
+                arr2.sort((item1, item2) => item1.bno - item2.bno);
+
+                //내림차순 정렬
+                arr2.sort((item1, item2) = -(item1.bno - item2.bno));
+            }
+        </script>
+    </head>
+    <body>
+        <div class="card">
+            <div class="card-header"></div>
+
+            <div class="card-body">
+                <button onclick="basic()" class="btn btn-info btn-sm mb-2">기본</button><br />
+                <button onclick="addNewItem()" class="btn btn-info btn-sm mb-2">새로운 항목 추가</button><br />
+                <button onclick="removeAndInsertItem()" class="btn btn-info btn-sm mb-5">항목 제거 및 삽입</button><br />
+                <button onclick="concatArray()" class="btn btn-info btn-sm mb-5">새로운 배열 합치기</button><br />
+                <button onclick="filterItem()" class="btn btn-info btn-sm mb-5">필터링 후 새로운 배열 생성</button><br />
+                <button onclick="searchItem()" class="btn btn-info btn-sm mb-5">항목 찾기</button><br />
+                <button onclick="handleEachItem()" class="btn btn-info btn-sm mb-5">항목 일괄 처리</button><br />
+                <button onclick="mapItem()" class="btn btn-info btn-sm mb-5">항목을 다른 항목으로 매칭한 배열  생성</button><br />
+                <button onclick="sortItem()" class="btn btn-info btn-sm mb-5">항목 정렬</button><br />
+            </div>
+        </div>
+    </body>
+</html>

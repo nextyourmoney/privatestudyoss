@@ -10,29 +10,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
     <script>
-        const now = new Date(); //객체 선언
-        //toLocalString은 날짜와 시간이 조회되며, DateString은 날짜가 조회, TimeString은 시간이 조회된다.
-        console.log("today: ", now,"1", now.toLocaleString, now.toLocaleDateString(), now.toLocaleTimeString());
+        var var1 = 0;
+        var var2;
+        var var3 = null;
 
-        //각 상세 날짜 조회
-        console.log("year: ", now.getFullYear());
-        console.log("month:", now.getMonth() + 1);
-        console.log("date:", now.getDate());
-        console.log("day:", now.getDay());
-        console.log("hour:", now.getHours());
-        console.log("minute:", now.getMinutes());
-        console.log("second:", now.getSeconds());
+        console.log(typeof var1);
+        console.log(typeof var2);
+        console.log(typeof var3);
 
+        //값이 없는 변수를 조건으로 주어도 false
+        //값이 홀수인 변수를 조건으로 주어도 false
+        //값이 null 변수를 조건으로 주어도 false이다. 
+        if(var1){
+            console.log("true");
+        } else {
+            console.log("false");
+        }
+
+        //var1이 false이면 || 뒤의 조건이 수행되고 true면 val1이 수행된다.
+        var var4 = var1 || {};
+        console.log(var4);
     </script>
 </head>
 <body>
     <div class="card">
         <div class="card-header">
-            html 날짜 정보
+                if조건
         </div>
 
         <div class="card-body">
-            
+
         </div>
     </div>
 </body>

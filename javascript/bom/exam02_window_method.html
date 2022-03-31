@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            window method - dialog
+        </div>
+
+        <div class="card-body">
+            <a href="javascript:showAlert()" class="btn btn-info btn-sm mr-2">Alert</a>
+            <a href="javascript:showConfirm()" class="btn btn-info btn-sm mr-2">Confirm</a>
+            <a href="javascript:showPrompt()" class="btn btn-info btn-sm mr-2">Prompt</a>
+
+        </div>
+
+        <script>
+            function showAlert(){
+                window.alert("알림 메시지...")
+            }
+
+            function showConfirm(){
+                let result = window.confirm("rhqnd");
+                console.log(result);
+
+            }
+
+            function showPrompt(){
+                let result = window.prompt(); //사용하지 마라
+
+            }
+        </script>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            window method - setInerval(), setTimeout()
+        </div>
+
+        <div class="card-body">
+            <a href="javascript:startIntervalRun()" class="btn btn-info btn-sm mr-2">주기적 실행</a>
+            <a href="javascript:stopIntervalRun()" class="btn btn-info btn-sm mr-2">주기적으로 실행 취소</a>
+            
+            <hr/>
+            <a href="javascript:startTimeoutRun()" class="btn btn-info btn-sm mr-2">주어진 시간 경과 후 실행</a>
+            <a href="javascript:stopTimeoutRun()" class="btn btn-info btn-sm mr-2">주어진 시간 후 실행 취소</a>
+
+        </div>
+
+        <script>
+            var taskid = null;
+            var taskid2 = null;
+
+            function startIntervalRun(){
+                taskId = window.setInterval(function(){
+                    console.log("runnning");
+                }, 1000); //1초마다 함수 작동
+            }
+
+            function stopIntervalRun(){
+                window.clearInterval(taskid)
+
+            }
+
+            //특정 시간 후 실행 
+            function startTimeoutRun(){
+                taskid2 = window.setTimeout(function(){
+                    console.log("runnign")
+                    }, 5000); //5초 후 정지
+            }
+
+            function stopTimeoutRun(){
+                window.clearTimeout(taskid2);
+
+            }
+        </script>
+    </div>
+</body>
+</html>
