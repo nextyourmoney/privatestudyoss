@@ -40,7 +40,7 @@ public class Silver5_8979 {
 	        	} 
         	}
         });
-        /*
+        
         System.out.println("test");
         for (int i = 0; i <N; i++) { // 행 반복
 			for (int j = 0; j < 4; j++) { // 열 반복
@@ -48,12 +48,9 @@ public class Silver5_8979 {
 			}
 			System.out.printf("\n");
 		}
-        */
 		
-        
-        
-        
         int rank = 1;
+        
         int[] arr2 = new int[3];
         arr2[0] = numArr[0][1];
  	   	arr2[1] = numArr[0][2];
@@ -61,7 +58,6 @@ public class Silver5_8979 {
  	   	
  	   	if(K == numArr[0][0]) {
  	   		System.out.println(rank);
- 	   	
  	   		
  	   	} else {
  	   	
@@ -74,7 +70,8 @@ public class Silver5_8979 {
 	    	   if(Arrays.equals(arr1, arr2)) {
 	    		   if(K == numArr[i][0]){
 		    		   System.out.println(rank);
-		    		   break;
+		    		   System.exit(0);
+		    		   
 		    	   } else {
 		    		   arr2[0] = numArr[i][1];
 		    	 	   arr2[1] = numArr[i][2];
@@ -89,12 +86,7 @@ public class Silver5_8979 {
 	    	 	  //System.out.println(rank);
 	    	   }
 	       }
-	 	   	
 	 	   System.out.println(rank);
- 	   	}
-
-        
-        
+ 	   	} 
 	}
-
 }
