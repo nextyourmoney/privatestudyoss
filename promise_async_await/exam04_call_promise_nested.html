@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" >
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function work1(){
+            const promise = new Promise((resolve, reject) => {
+                console.log("시간을 요한는 작업 진행");
+                const result = {status: "success", value: 100};
+                if(result.status === "suceess"){
+                    resolve(result);
+                } else{
+                    reject(result);
+                }
+            });
+            return promise;
+        }
+
+        function work2(){
+            const promise = new Promise((resolve, reject) => {
+                console.log("시간을 요한는 작업 진행");
+                const result = {status: "success", value: 100};
+                if(result.status === "suceess"){
+                    resolve(result);
+                } else{
+                    reject(result);
+                }
+            });
+            return promise;
+        }
+        
+        function dowork1(){
+            //work를 t1이라 한다면 work는 지속으로 수행된다.
+            work1()
+            .then((data) => {
+                console.log(data);
+                work2()
+                    .then((data) => {
+                        console.log(data); //console을 수행하는 스레드
+                    }).catch((error) =>{
+                        console.log(error); //t2 스레드
+                    }).finally(() => {
+                        console.log("마무리"); //t2 스레드
+                    });
+                 //console을 수행하는 스레드
+            }).catch((error) =>{
+                console.log(error); //t2 스레드
+            }).finally(() => {
+                console.log("마무리"); //t2 스레드
+            });
+        }
+        
+        async function dowork2(){ //async는 전체가 t2스레드로 한다. 즉 하나의 별도의 스레드로 취급한다.
+            try{
+                let data1 = await work1(); //하나의 작업이 끝나야 다음 작업이 이어지도록 스레드에 명령한다.
+                console.log(data);
+                let data2 = await work2(); //work2가 성공하면 data2에 삽입하고 실패하면 error출력의 방식이다.
+                console.log(data2);
+            } catch(error){
+                console.log(error);
+            } finally{
+                console.log("마무리");
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            promise 중첩 실행
+        </div>
+
+        <div class="card-body">
+            <button class = "btn btn-info btn-sm mr-2" onclick="work1()"> 방법1</button>
+            <button class = "btn btn-info btn-sm mr-2" onclick="work2()"> 방법2</button>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            function requestgetAjax(){
+               /*
+                $.ajax({
+                    url: "exam05_response.html",
+                    method: "get",
+                    data: {pageNo:1}
+                }).done((data)=>{
+                    $("#content").html(data);
+                });
+                */
+
+                $.get("exam05_response.html", {pageNo:1}, (data) => {
+                    $("#content").html(data);
+                });
+            }
+
+            //live servr는 post를 지원하지 않는다. 
+            function requestpostAjax(){
+               /*
+                $.ajax({
+                    url: "exam05_response.html",
+                    method: "post",
+                    data: {pageNo:1}
+                }).done((data)=>{
+                    $("#content").html(data);
+                });
+                */
+
+                $.post("exam05_response.html", {pageNo:1}, (data) => {
+                    $("#content").html(data);
+                });
+            }
+        </script>
+
+    </head>
+    <body>
+        <div class="card">
+            <div class="card-header"></div>
+
+            <div class="card-body">
+                <button class="btn btn-info btn-sm" onclick="requestgetAjax()">Ajax get 요청</button>
+                <button class="btn btn-info btn-sm" onclick="requestpostAjax()">Ajax post 요청</button>
+                <hr />
+                <div id="content">
+                    <div>
+                        <div class="card">
+                            <div class="card-header">원래 내용</div>
+                            <div class="card-body">
+                                <img src="/images/photos/photo4.jpg" width="200px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

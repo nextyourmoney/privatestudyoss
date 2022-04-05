@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" >
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function requestAjax(){
+            //비동기 요청
+            // url요청 성공시 done => 실행
+            //3을 우선 출력 후 응답이 오면 2를 출력하는 것이 비동기 방식이다.
+            $.ajax({
+                url: "exam01_resonse.html"
+            }).done((data) => { //200일 때 실행
+                console.log("2-done callback");
+                console.log(data);
+                $("#content").html(data);
+            }).fail((response)=> { //400 or 500일 때 실행
+                console.log("2-fail callback");
+                if(error.status === 404){
+                    console.log("리소스가 존재하지 않음");
+                } else if (error.status === 500){
+                    console.log("서버 실행 오류");
+                };
+            }).always(()=>{
+                console.log("3-always callback");
+            }); 
+
+            console.log("3");
+
+            //리턴 값이 200이면 정상, 404: 리소스를 찾지 못함, 500: 서버 실행 오류 발생이다.
+        }
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            Ajax요청과 응답 처리
+
+        </div>
+
+        <div class="card-body">
+            <button class = "btn btn-info btn-sm" onclick="requestAjax()"> 요청 </button>
+            <hr/>
+            <img src="/javascript/images/photo1.jpg" id = "content"/>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" >
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function handleBtn1(name){
+            if(name === "naver"){
+                $("#form1").attr("action", "http://www.naver.com");
+                $(".link").attr("href", "http://www.naver.com");
+            } else if(name === "w3schools"){
+                $("#form1").attr("action", "http://www.w3schools.com");
+                $(".link").attr("href", "http://www.w3schools.com");
+            }
+
+            function showImg(){
+                $("img").attr("src", "/javascript/images/photo6.jpg");
+                
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+
+        <div class="card-body">
+            <button class="btn btn-info btn-sm" onclick="handleBtn1('naver')">Naver</button>
+            <button class="btn btn-info btn-sm" onclick="handleBtn1('w3schools')">W3schools</button>
+            <hr/>
+            <form id="form1">
+                <button  class="btn btn-danger btn-sm">이동</button>
+            </form>
+            <hr/>
+            <a class="link" href="#">이동</a>
+            <hr/>
+            <button class="btn btn-info btn-sm" onclick="showImg()">이미지 가져오기</button>
+            <hr>
+            <img/>
+            <img/>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" >
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function showImg(){
+            $("#img1").show();
+        }
+
+        function hideImg(){
+            $("#img1").hide();
+        }
+
+        function roundImg(){
+            $("#img1").addClass("rounded-circle");
+        }
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+
+        <div class="card-body">
+            <button class="btn btn-info btn-sm" onclick="showImg()">보이기</button>
+            <button class="btn btn-info btn-sm" onclick="hideImg()">숨기기</button>
+            <button class="btn btn-info btn-sm" onclick="roundImg()">둥글게</button>
+            <hr/>
+            <img src=   "/javascript/images/photo2.jpg" width="200px"/>
+            <img id="img1" src= "/javascript/images/photo6.jpg" width="200px"/>
+            <img src= "/javascript/images/photo3.jpg" width="200px"/>
+
+        </div>
+    </div>
+</body>
+</html>

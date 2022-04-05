@@ -6,9 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" >
+    <!-- slim버전과 min버전의 차이 -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
+        function findObject(){
+            //html dom을 이용한 엘리먼튼 다루기
+            /*
+            let imgs = document.querySelectorAll("img"); //노드 리스트로 가져온다.
+            imgs.forEach(img =>{
+                img.setAttribute("src", "/javascript/images/photo1.jpg")
+            });
+            */
+
+            //jquery를 이용 //jquey객체를 리턴한다.
+            let $imgs = $("img");
+            $imgs.attr("src", "/javascript/images/photo5.jpg");
+
+            $("#div1").css("background-color", "yellow");
+
+            $(".class1").css("border-radius", "50px");
+        }
+    </script>
 </head>
 <body>
     <div class="card">
@@ -17,7 +38,15 @@
         </div>
 
         <div class="card-body">
-
+            <button class="btn btn-info btn-sm" onclick="findObject()">jQuery 찾기</button>
+            <hr/>
+            <img id="photo1" src="/javascript/images/photo10.jpg" width="200px"/>
+            <img id="photo1" src="/javascript/images/photo10.jpg" width="200px"/>
+            <hr/>
+            <div id="div1" style="width:100px;height:100px; border:1px solid black"></div>
+            <hr/>
+            <div class="class1" style="width:100px;height:100px; border:1px solid black"></div>
+            <div class="class1" style="width:100px;height:100px; border:1px solid black"></div>
         </div>
     </div>
 </body>
