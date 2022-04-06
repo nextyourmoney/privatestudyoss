@@ -15,6 +15,7 @@ local.properties
 .recommenders
 
 Workspace/ossspring/target/
+Workspace/Servers/
 
 
 # External tool builders
