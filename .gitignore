@@ -14,8 +14,8 @@ local.properties
 .loadpath
 .recommenders
 
-Workspace/ossspring/
-Workspace/Servers/
+Workspace/ossspring/target/
+
 
 # External tool builders
 .externalToolBuilders/
