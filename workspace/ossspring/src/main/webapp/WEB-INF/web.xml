@@ -5,24 +5,49 @@
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
-	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	
+	<!--contextloaderListenet가 root web applciationcontext를 생성 할 때 spring 설정파일 위
+	  -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Processes application requests -->
+	<!-- 웹 애플리케이션이 배치될 때(deployment), 해제될 (undeploymet) root webApplocationcontext를 생성하고 제거하기 위해 contextLoaderlistner 설 -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!--사용할 spring설정 파일의 위치 설 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
+		<!-- 배치할 때 dispathcerServlet객체를 미리 생성하도 설  -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
+	<!-- .....webapp/*의 url은 모두 처리한ㄷ.  -->
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
+		
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!--클라이언트가 post 방식으로 한글을 보냈을 때 한글을 복원시키는 filter 추가 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<!-- 클라이언트가 localhost:8080/webapp/* 요청이 왔을 떄 characterEncodingFilter 처리 -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	
 </web-app>
