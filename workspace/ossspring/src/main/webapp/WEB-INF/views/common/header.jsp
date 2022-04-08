@@ -94,9 +94,3 @@
                </div>
                   
                </div>
-               <div class="col-md-8"></div>
-            </div>
-         </div>
-      </div>
-   </body>
-</html>
