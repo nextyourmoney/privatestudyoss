@@ -27,6 +27,7 @@ public class HomeController {
 		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.info("확인");
+		
 		return "home";
 		
 		
