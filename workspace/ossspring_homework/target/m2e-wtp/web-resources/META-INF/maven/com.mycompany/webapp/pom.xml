@@ -41,7 +41,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
-		<!-- Logging 
+		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -59,8 +59,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		-->
-		<!-- 
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -84,22 +82,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 				</exclusion>
 			</exclusions>
 			<scope>runtime</scope>
-		</dependency>-->
-		
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-core</artifactId>
-		    <version>2.17.2</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-slf4j-impl</artifactId>
-		    <version>2.17.2</version>
-		   <!-- <scope>test</scope> --> 
-		</dependency>
-
 
 		<!-- @Inject -->
 		<dependency>
