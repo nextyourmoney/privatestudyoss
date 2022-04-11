@@ -12,27 +12,55 @@
             요청 방식별 메소드 매핑
          </div>
          <div class="card-body">
-            <button class="btn btn-info btn-sm" onclick="requestGet()">GET방식</button>
-            <button class="btn btn-info btn-sm" onclick="requestPost()">POST방식</button>
+         	<!-- ajax, div 선어느 form 태그 모두 get에서 원하는 데이터를 선언할 때 사용 할 수 있다. -->
+           	<div class="m-2"><button class="btn btn-info btn-sm" onclick="requestGet()">GET방식1</button></div>
+            <div class="m-2"><a href="${pageContext.request.contextPath}/ch02/method?bkind=free&bno=1" class="btn btn-info btn-sm">GET방식2</a></div>
+            <form class="m-2" method="get" action="${pageContext.request.contextPath}/ch02/method">
+               bkind: <input type="text" name="bkind" value="free"/> <br/>
+               bno: <input type="text" name="bno" value="1"> <br/>
+               <input type="submit" value="GET방식3" class="btn btn-info btn-sm"/>
+            </form>
+            
+             <hr/>
+             
+             <%-- POST방식의 처리 방식 2가지 이다. --%>
+            <form class="m-2" method="post" action="${pageContext.request.contextPath}/ch02/method">
+               bkind: <input type="text" name="bkind" value="free"/> <br/>
+               bno: <input type="text" name="bno" value="1"> <br/>
+               <input type="submit" value="POST방식" class="btn btn-info btn-sm"/>
+            </form>
+             <div class="m-2"><button class="btn btn-info btn-sm" onclick="requestPost()">post방식2</button></div>
+             
             <button class="btn btn-info btn-sm" onclick="requestPut()">PUT방식</button>
             <button class="btn btn-info btn-sm" onclick="requestDelete()">DELETE방식</button>
          </div>
          <script>
+         	/* get방식 요청*/
             function requestGet() {
             	/* ajax를 사용하여 put, get, delte등의 사용한다. */
                $.ajax({
                   url:"${pageContext.request.contextPath}/ch02/method",
-                  method: "GET"
+                  method: "GET",
+                  //data = "method?bkind=free&bno=1"
+                  data: {bkind:"free", bno:1}
                })
-               .done((data) => {});
+               .done((data) => {}); 
+               
+               //dom의 역활과 같다. //a태그의get 전송 방식과 유사하다.
+               //location.href = "${pageContext.request.contextPath}/ch02/method?bkind=free&bno=1";
             }
+         	
+         	//POST방식 전송
             function requestPost() {
                $.ajax({
                   url:"${pageContext.request.contextPath}/ch02/method",
-                  method: "POST"
+                  method: "POST",
+             	  //data = "method?bkind=free&bno=1"
+                  data: {bkind:"free", bno:1}
                })
                .done((data) => {});
             }
+         	
             function requestPut() {
                $.ajax({
                   url:"${pageContext.request.contextPath}/ch02/method",
