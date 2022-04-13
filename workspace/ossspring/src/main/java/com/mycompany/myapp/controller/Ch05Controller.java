@@ -98,6 +98,7 @@ public class Ch05Controller {
 		
 	}
 	
+	//json기반 쿠키 생성
 	@GetMapping("createJsonCookie")
 	public String createJsonCookie(HttpServletResponse response) throws UnsupportedEncodingException {
 		JSONObject jsonObject = new JSONObject();
@@ -111,6 +112,18 @@ public class Ch05Controller {
 		response.addCookie(cookie);
 		
 		return "redirect:/ch05/content";
+	}
+	
+	//쿠키 값 사용하기
+	@GetMapping("getJsonCookie")
+	public String getJsonCookie(@CookieValue String user) {
+		log.info(user);
+		JSONObject jsonObject = new JSONObject(user);
+		String username = jsonObject.getString("username");
+		String useremail = jsonObject.getString("useremail");
+		log.info("username; " + username);
+		log.info("useremail; " + useremail);
+	return "redirect:/ch05/content";
 	}
 	
 		
