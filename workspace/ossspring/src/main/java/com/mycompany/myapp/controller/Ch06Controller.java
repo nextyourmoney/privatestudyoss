@@ -68,6 +68,18 @@ public class Ch06Controller {
 		return "ch06/fragmentHtml";
 	}
 	
+	@ResponseBody//리턴되는 내용이 본문에 들어간다. 그러니까 html의 바디에 들어간다. 
+	@GetMapping(value="/getJson2", produces="application/json; charset=UTF-8") 
+	public String getJson2() throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("fileName", "photo6.jpg");
+		String json = jsonObject.toString();
+		
+		return json;
+	}
+	
+	
+	
 
 }
 
