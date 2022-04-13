@@ -1,5 +1,7 @@
 package com.mycompany.myapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,18 +26,20 @@ public class Ch03Controller {
 		
 	}
 	
-	/*
-	 * 기본 default로 String을 받는다.
+	
+	 //기본 default로 String을 받는다.
 	@RequestMapping("/method1")
-	public String method1(String param1, String param2, String param3, String param4, String param5) {
+	public String method1(String param1, String param2, String param3, String param4, String param5, HttpServletRequest request) {
 		log.info(param1);
 		log.info(param2);
 		log.info(param3);
 		log.info(param4);
 		log.info(param5);
+		String paramValue = request.getParameter("param1");
+		log.info(paramValue);
 		return "ch03/content";
 	}
-	*/
+	
 	
 	//각각의 형식으로 지정 할 수 있고 Date는 Spring의 제공하는 데이터 형식 포멧이다.
 	//매개변수의 이름과 파라미터의 이름이 다를 경우 RequestParam을 통해 매핑 시킨다. 
