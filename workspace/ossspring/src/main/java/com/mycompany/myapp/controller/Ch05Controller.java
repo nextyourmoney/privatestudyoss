@@ -1,10 +1,14 @@
 package com.mycompany.myapp.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -47,13 +51,21 @@ public class Ch05Controller {
 	
 	@GetMapping("createCookie")
 	public String createCookie(HttpServletResponse response) {
-		log.info("실행");
+		log.info("쿠키 생성 실행");
 		
 		 Cookie cookie = new Cookie("useremail", "blueskii@naver.com"); 
 	     cookie.setDomain("localhost");    //localhost 면 전송
-	     cookie.setPath("/webapp/ch05");         //localhost/... 이면 모두 전송
+	     cookie.setPath("/");         //localhost/... 이면 모두 전송
 	     cookie.setMaxAge(30*60);      //이 시간동안에만 전송
 	     cookie.setHttpOnly(true);       //JavaScript에서 못 읽게함
+	     cookie.setSecure(true);       //https://만 전송
+	     response.addCookie(cookie);  //set형태로 쿠키를 세팅하고 
+	     
+		 cookie = new Cookie("userid", "spring"); 
+	     cookie.setDomain("localhost");    //localhost 면 전송
+	     cookie.setPath("/");         //localhost/... 이면 모두 전송
+	     cookie.setMaxAge(30*60);      //이 시간동안에만 전송
+	     cookie.setHttpOnly(false);       //JavaScript에서 못 읽게함
 	     cookie.setSecure(true);       //https://만 전송
 	     response.addCookie(cookie);  //set형태로 쿠키를 세팅하고 
 		
@@ -61,7 +73,45 @@ public class Ch05Controller {
 		return "redirect:/ch05/content";
 	}
 	
+	@GetMapping("getCookie1")
+	public String getCookie1(HttpServletRequest request) {
+		log.info("실행");
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies) {
+			String cookieName = cookie.getName();
+			String cookieValue = cookie.getValue();
+			log.info(cookieName + ":" + cookieValue);
+		}
+		
+		return "redirect:/ch05/content";
+		
+	}
 	
+	@GetMapping("getCookie2")
+	public String getCookie2(@CookieValue String userid, @CookieValue String useremail) {
+		log.info("실행");
+		log.info("userid: " + userid);
+		log.info("useremail: " + useremail);
+		
+		
+		return "redirect:/ch05/content";
+		
+	}
+	
+	@GetMapping("createJsonCookie")
+	public String createJsonCookie(HttpServletResponse response) throws UnsupportedEncodingException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("userid","spring");
+		jsonObject.put("useremail", "dff@false");
+		String json = jsonObject.toString();
+		log.info(json);
+		json = URLEncoder.encode(json, "UTF-8");
+		
+		Cookie cookie = new Cookie("user", json);
+		response.addCookie(cookie);
+		
+		return "redirect:/ch05/content";
+	}
 	
 		
 		
