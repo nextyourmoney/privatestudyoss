@@ -92,6 +92,19 @@ public class Ch08Controller {
 	   return "redirect:/ch08/content";
    }
    
+   @GetMapping("/userInfo")
+   public String userInfo(HttpSession session, @SessionAttribute String sessionMid, @SessionAttribute("sessionMid") String mid) {
+	   
+	   String memberId = (String) session.getAttribute("sessionMid");
+	   
+	   log.info("sessionmid" + sessionMid);
+	   log.info("mid:" + mid);
+	   log.info(memberId);
+	   
+	   
+	   return "redirect:/ch08/content";
+   }
+   
    
    
 }

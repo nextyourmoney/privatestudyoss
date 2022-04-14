@@ -50,6 +50,7 @@
 				</c:if>
 				<c:if test="${sessionMid != null}">
 					<a href="logout" class="btn btn-info btn-sm">로그아웃</a>
+					<a href="userInfo" class="btn btn-info btn-sm">사용자 정보</a>
 				</c:if>
 			</div>
 		</div>
