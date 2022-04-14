@@ -35,4 +35,10 @@
          <span class="mr-2">Ch06.</span> <a href="${pageContext.request.contextPath}/ch06/content" class="text-white">Controller/Forward & Redirect</a>
       </h6>
    </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch07.</span> <a href="${pageContext.request.contextPath}/ch07/content" class="text-white">ControllerData Delivery</a>
+      </h6>
+   </li>
 </ul>
