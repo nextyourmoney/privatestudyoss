@@ -101,6 +101,16 @@
 	</div>
 </div>
 
+<div class="card m-2">
+	<div class="card-header">
+	command(DTO) 객체로 전달
+	</div>
+	<div class="card-body">
+		<a href = "commandObject?kind=suit&sex=woman" class = "btn btn-info btn-sm mr-2">modelattrivute로 객체 전달 </a>
+		
+	</div>
+</div>
+
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

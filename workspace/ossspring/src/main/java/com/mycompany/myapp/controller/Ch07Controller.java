@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.myapp.controller.dto.*;
 import com.mycompany.myapp.dao.Ch07Board;
 import com.mycompany.myapp.dao.Ch07City;
+import com.mycompany.myapp.dao.Ch07Cloth;
 import com.mycompany.myapp.dao.Ch07Member;
 
 import lombok.extern.log4j.Log4j2;
@@ -128,6 +129,7 @@ public class Ch07Controller {
 	   return modelandview;
    }
    
+   //rkwkd aksgdl tkdydehlsek.
    @GetMapping("/modelArgument")
    public String  modelArgument(Model model) {
 	   Ch07Board board = new Ch07Board(1, "wpahr1", "wdifj2", "rmfTmsdl", new Date());
@@ -143,6 +145,22 @@ public class Ch07Controller {
    public String  modelAttribute(@ModelAttribute("kind") String kind, @ModelAttribute("sex") String sex) {
 	   return "ch07/clothinfo";
    }
+   
+   //dto(command 객체)를 전달 받으면 자동으로clothinfo로 전달된다. 
+   //이때 CH07Cloth는 첫번째 클래스가 소문자로 전환된 뒤 requset객체에 저장된다.
+   //clothinfo에서 사용 데이터를 사용하고자 할 때 ${ch07Cloth.sex} 의 형태로 사용하면 된다.
+   @GetMapping("/commandObject")
+   public String  modelAttribute(Ch07Cloth cloth) {
+	   return "ch07/clothinfo";
+   }
+   
+   /*
+   //modelattribute로 클래스를 선언하게 되면jsp에서 사용할 때 클래스를 생략하고 바로 ${cloth}로 나타낼 수 있다.
+   @GetMapping("/commandObject")
+   public String  modelAttribute(@ModelAttribute("cloth") Ch07Cloth cloth) {
+	   return "ch07/clothinfo";
+   }
+   */
    
    
    

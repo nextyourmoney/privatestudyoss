@@ -13,6 +13,11 @@
    		<p>cloth kind: ${kind }</p>
    		<p>cloth sex: ${sex }</p>
    		
+   		<hr/>
+   		
+   		<p>cloth kind: ${ch07Cloth.kind}</p>
+   		<p>cloth sex: ${ch07Cloth.sex}</p>
+   		
    </div>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
