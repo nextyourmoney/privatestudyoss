@@ -162,6 +162,15 @@ public class Ch07Controller {
    }
    */
    
+   //commonData는 가장 먼저 실행되는 공통 데이터 이다. 
+   //모든 요청 메소드가 있을 때 마다 실행된다.
+   @ModelAttribute("commonData")
+   public Ch07Board getShareData() {
+	   log.info("common 실행");
+	  Ch07Board board = new Ch07Board(2, "제목2", "제목2", "제목2", new Date());
+	   return null;
+   }
+   
    
    
 }

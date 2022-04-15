@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.controller.dto.*;
@@ -28,6 +29,9 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @RequestMapping("/ch08")
 @Log4j2
+
+//새로운 session저장소 생성
+@SessionAttributes({"inputForm"})
 public class Ch08Controller {
    private static final Logger logger = LoggerFactory.getLogger(Ch08Controller.class);
    private int count;  //컨트롤러에서 공유해서 사용하는 것 -> 컨트롤러에는 필드를 선언하지 않는 것이 좋다.
@@ -105,6 +109,42 @@ public class Ch08Controller {
 	   return "redirect:/ch08/content";
    }
    
+   
+   
+   //새로운 세션 저장소에 저장하는 역활을 한다. 
+   //새로운 세션저장소에 저장 할 때 기존의 객체들을사용하기 위해 기존에 inputForm이라는 이름의 객체들을 inputForm이라고 재정의 한다.
+   //여러번 실행되면 객체가 매번 새로 생성되기 때문에 단 한번 실행된다.
+   @ModelAttribute("inputForm")
+   public Ch08InputForm getCh08InputForm() {
+	   Ch08InputForm inputForm = new Ch08InputForm();
+	   return inputForm;
+	   
+   }
+   
+   @GetMapping("/inputStep1")
+   public String inputStep1() {
+	   return"ch08/inputStep1";
+   }
+   
+   //inputFrom이라는 이름으로 객체를 사용할 수 있다.
+   //dto에 데이터가 자동으로 저장되어 있다.
+   @PostMapping("/inputStep2")
+   public String inputStep2(@ModelAttribute("inputForm") Ch08InputForm inputForm) {
+	   log.info("data1 " + inputForm.getData1());
+	   log.info("data2: " + inputForm.getData2());
+	   return"ch08/inputStep2";
+   }
+   
+   //done이 참고하는 객체와 inputstetp2가 참조하는 객체가 같다.
+   @PostMapping("/inputDone")
+   public String inputStep3(@ModelAttribute("inputForm") Ch08InputForm inputForm, SessionStatus sessionStatus) {
+	   log.info("data1: " + inputForm.getData1());
+	   log.info("data2: " + inputForm.getData2());
+	   log.info("data3: " + inputForm.getData3());
+	   log.info("data4: " + inputForm.getData4());
+	   sessionStatus.setComplete();
+	   return"redirect:/ch08/content";
+   }
    
    
 }

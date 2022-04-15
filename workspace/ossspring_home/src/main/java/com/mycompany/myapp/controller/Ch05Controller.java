@@ -28,67 +28,7 @@ public class Ch05Controller {
 		return "ch04/content";
 	}
 	
-	@PostMapping("/method1")
-	public String method1(ch04Dto dto) {
-		log.info(dto.toString());
-		
-		return "ch04/content";
-	}
 	
-	//DO와 유효성 검사기를 연다 webDataBinder가 중요하다
-	//아래 valid와 연관된다.
-	@InitBinder("joinForm")
-	public void bindCh04MemberJoinFormValidator(WebDataBinder binder) {
-		//binder.setValidator(new Ch04MemberJoinFormValidator());
-		
-		//하나하나의 요소별 유효성 검
-		binder.addValidators(
-		new Ch04MemberIdValidator(),
-        new Ch04MemberPasswordValidator(),
-        new Ch04MemberEmailValidator(),
-        new Ch04MemberTelValidator()
-        );
-	}
-	
-	//valid는 유효성 검사를 하라는 지시이다.
-	//BindingResult bindingresult == Errors errors
-	//modelattribute로 joinform를 참조한다.
-	@PostMapping("/join")
-	public String join(@ModelAttribute("joinForm") @Valid Ch04Member member, Errors errors) {
-		log.info(member);
-		
-		//유효성 검사 확인
-		if(errors.hasErrors()) {
-			//다시 입력 폼으로 돌아간다.
-			return "ch04/content";
-		} 
-		
-		//회원 가입 처리
-		//....
-		
-		//홈페이지로 이동
-			return "redirect:/";
-		}
-	
-	
-		@InitBinder("loginForm")
-		public void bindCh04MemberLoginFormValidator(WebDataBinder binder) {
-			binder.setValidator(new Ch04MemberLoginFormValidator());
-			
-		}
-		
-		
-		@PostMapping("/login")
-		public String login(@ModelAttribute("loginForm") @Valid Ch04Member member, Errors errors) {
-			log.info(member);
-			
-			//유효성 검사 확인
-			if(errors.hasErrors()) {
-				return "ch04/content";
-			} 
-		
-				return "redirect:/";
-			}
 		
 		
 		
