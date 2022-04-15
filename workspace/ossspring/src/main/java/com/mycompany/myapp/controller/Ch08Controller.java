@@ -109,8 +109,45 @@ public class Ch08Controller {
 	   return "redirect:/ch08/content";
    }
    
+   @RequestMapping(value="/loginAjax", produces= "application/json; charset=UTF-8")
+   @ResponseBody //응답의 본문에 들어간다.
+   public String loginAjax(String mid, String mpassword, HttpSession session) {
+	   String result = null;
+	   if(mid.equals("spring")) {
+		   if(mpassword.equals("12345")) {
+			   result = "success";
+			   session.setAttribute("sessionMid", mid);
+		   } else {
+			  result = "worngpassword";
+		   }
+	   } else {
+		   result = "worngMid";
+		   
+	   }
+	   JSONObject jsonObject = new  JSONObject();
+	   jsonObject.put("result", result);
+	   String json = jsonObject.toString();
+	   return json;
+	   
+	   
+   }
+    
+   @RequestMapping(value = "/logoutAjax", produces = {"application/json; charset = UTF-8"})
+   @ResponseBody
+   public String logoutAjax(HttpSession session, HttpServletRequest request) {
+      //세션에서 주어진 키를 삭제
+      //session.removeAttribute("sessionMid");
+	   
+      //세션 객체 자체를 제거
+      request.getSession().invalidate();
+      //request.getSession(true);
+      JSONObject jsonObject = new JSONObject();
+      jsonObject.put("result", "success");
+      String json = jsonObject.toString();
+      return json;
+   }
    
-   
+
    //새로운 세션 저장소에 저장하는 역활을 한다. 
    //새로운 세션저장소에 저장 할 때 기존의 객체들을사용하기 위해 기존에 inputForm이라는 이름의 객체들을 inputForm이라고 재정의 한다.
    //여러번 실행되면 객체가 매번 새로 생성되기 때문에 단 한번 실행된다.
