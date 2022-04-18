@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -53,19 +54,22 @@ public class Ch11Controller {
    @GetMapping("/form1")
    public String form1(@ModelAttribute("member") Ch11Member member) {
 	   member.setMid("spring");
-	   member.setMname("dlfkf");
+	   member.setMname("JBC");
 	   member.setMpassword("12345");
 	   member.setMnation("한국");
-	   return "ch11/form1";
-	   
+	   return "ch11/form1"; 
    }
-//   
-//   @GetMapping("/form1")
-//   public String handleform1(@ModelAttribute("member") Ch11Member member) {
-//	   log.info(member);
-//	   return "redirect:/ch11/content";
-//	   
-//   }
+   
+   @PostMapping("/form1")
+   public String handleform1(@ModelAttribute("member") Ch11Member member) {
+	  log.info("mid", member.getMid());
+	  log.info("mname", member.getMname());
+	  log.info("mpassword", member.getMpassword());
+	  log.info("mnation", member.getMnation());
+	  log.info("malnguage: " + Arrays.toString(member.getMskill()));
+      log.info(member);
+	   return "redirect:/ch11/form1";
+   }
    
    @GetMapping("/form2")
    public String form2(@ModelAttribute("member") Ch11Member member, Model model) {
@@ -153,6 +157,12 @@ public class Ch11Controller {
       member.setMcity(3);
       
       return "ch11/form4";
+   }
+   
+   @GetMapping("/form5")
+   public String form5(@ModelAttribute("member") Ch11Member member) {
+	  
+	   return "ch11/form5"; 
    }
 
    
