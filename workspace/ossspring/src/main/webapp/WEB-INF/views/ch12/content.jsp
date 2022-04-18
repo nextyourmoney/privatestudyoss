@@ -6,7 +6,7 @@
 		ViewName을 객체 이름으로 해석
 	</div>
 	<div class="card-body">
-		<h6>다운로드 파일 목록<span id="totalFileNum" class="text-danger">0</span>)</h6>
+		<h6>다운로드 파일 목록 (<span id="totalFileNum" class="text-danger">0</span>)</h6>
 		<div id="fileList"></div>
 	</div>
 	
@@ -20,7 +20,7 @@
 				var ulTag = "<ul>";
 				for(var fileName of data.fileList){
 					ulTag += "<li>";
-					ulTag += " <a href='#'>" + fileName +  "</a>";
+					ulTag += " <a href='fileDownload?fileName=" + fileName + "'>" +fileName +  "</a>";
 					ulTag += "</li>";
 				}
 				ulTag += "</ul>";

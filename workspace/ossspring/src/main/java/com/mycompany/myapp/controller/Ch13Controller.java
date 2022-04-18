@@ -35,33 +35,22 @@ import com.mycompany.myapp.controller.dto.*;
 
 import lombok.extern.log4j.Log4j2;
 
-@Controller
-@RequestMapping("/ch12")
+@Controller("ch13Controller")
+@RequestMapping("/ch13")
 @Log4j2
-
-//새로운 session저장소 생성
-@SessionAttributes({"inputForm"})
-public class Ch12Controller {
-   private static final Logger logger = LoggerFactory.getLogger(Ch12Controller.class);
-   private int count;  //컨트롤러에서 공유해서 사용하는 것 -> 컨트롤러에는 필드를 선언하지 않는 것이 좋다.
-   
+public class Ch13Controller {
+	
+	public Ch13Controller() {
+		log.info("실행");
+	}
+	
    @RequestMapping("/content")
    public String content(HttpServletRequest request) {
-      logger.info("실행");
-      return "ch12/content";
+      log.info("실행");
+      return "ch13/content";
    }
    
-   @RequestMapping("/fileList")
-   public String fileList() {
-	   log.info("실행");
-	   return "ch12FileListView";
-   }
-   
-   @RequestMapping("/fileDownload")
-   public String fileDownload(@ModelAttribute("fileName") String fileName, @ModelAttribute("userAgent") @RequestHeader("User-Agent") String userAgent) {
-	   log.info("실행");
-	   return "ch12FileDownloadView";
-   }
+
  
 }
    
