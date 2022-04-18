@@ -27,6 +27,16 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
          <param-name>contextConfigLocation</param-name>
          <param-value>classpath:spring/dispatcher/*.xml</param-value>
       </init-param>
+      
+	<!-- 404일 경우 500에러로 발생 -->
+	<init-param>
+	<!-- 요청을 찾이 못했을 때 강제로 에러를 발생시킨다. -->
+	    <param-name>throwExceptionIfNoHandlerFound</param-name>
+	    <param-value>true</param-value>
+	</init-param>
+      
+      
+      
       <!-- 요청에 대해 응답속도를 빠르게 해줌 배치할때 DispatcherServlet 객체를 미리 생성하도록 설정 -->
       <load-on-startup>1</load-on-startup>
       <multipart-config>
@@ -60,4 +70,10 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
       <filter-name>encodingFilter</filter-name>
       <url-pattern>/*</url-pattern>
    </filter-mapping>
+   
+   <!-- 404에러 처리 -->
+   <error-page>
+   	    <error-code>404</error-code>
+   	    <location>/WEB-INF/views/ch10/404.jsp</location>
+   </error-page>
 </web-app>

@@ -70,11 +70,19 @@
 			</div>
 			<div class="card-body">
 				<a href="filedownload?fileNo=1"
-				   class="btn btn-info btn-sm">파일 다운로드</a>
+				   class="btn btn-info btn-sm" onclick="filedownload6(1)">파일 다운로드</a>
 				<hr/>
 				<img src="filedownload?fileNo=1" width="200px"/>
 			</div>
+		
 		</div>
+		
+		<script type="text/javascript">
+				function filedownload6(fileNo){
+					console.log("dflkfd");
+					${"#downloadImg"}.attr("src", "filedownload?fileNo=" + fileNo);
+				}
+			</script>
 	</div>
 </div>
 

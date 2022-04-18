@@ -53,4 +53,16 @@
          <span class="mr-2">Ch09.</span> <a href="${pageContext.request.contextPath}/ch09/content" class="text-white">file upload and down</a>
       </h6>
    </li>
+   
+    <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch10.</span> <a href="${pageContext.request.contextPath}/ch10/content" class="text-white">controlle/ exception handler</a>
+      </h6>
+   </li>
+   
+   <li class="nav-item mb-2">
+      <h6 class="text-white">
+         <span class="mr-2">Ch11.</span> <a href="${pageContext.request.contextPath}/ch11/content" class="text-white">view/spring tag library</a>
+      </h6>
+   </li>
 </ul>
