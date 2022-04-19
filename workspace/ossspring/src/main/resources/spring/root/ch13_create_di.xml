@@ -3,9 +3,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<!-- 사용자가 직접 관리 할 수 없는 객체 생성 -->
 	<bean id="ch13Service2_1" class="com.mycompany.myapp.service.Ch13Service2CreateByXML"/>
-
 	<bean id="ch13Dao2" class="com.mycompany.myapp.dao.Ch13Dao2CreateByXML"/>
+	
+	<!-- 정적 메소드를 이용해서 객체 생성 -->
+	<bean id="ch13Service2_2" class="com.mycompany.myapp.service.Ch13Service2CreateByXML" factory-method="getInstance1"/>
+	
+	<!-- 관리 객체의 인스턴스 메소드를 이용해서 객체 생성 -->
+	<bean id="ch13Service2_3" class="com.mycompany.myapp.service.Ch13Service2CreateByXML" 
+		factory-bean="ch13Service2_1" factory-method="getInstance2"/>
 
 
 </beans>
