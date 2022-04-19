@@ -23,14 +23,11 @@ public class Ch13Service4injectAnno {
 	@Resource
 	private Ch13Dao1CreateByAnno ch13Dao1;
 	
-	
-	
 	@Resource
 	public void setCh13Dao1(Ch13Dao1CreateByAnno ch13Dao1) {
 		log.info("실행2");
 		this.ch13Dao1 = ch13Dao1;
 	}
-	
 	
 	/*
 	//이름으로 주입
