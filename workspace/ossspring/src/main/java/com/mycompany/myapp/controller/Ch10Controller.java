@@ -24,10 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.controller.dto.*;
-import com.mycompany.myapp.dao.Ch07Board;
-import com.mycompany.myapp.dao.Ch07City;
-import com.mycompany.myapp.dao.Ch07Cloth;
-import com.mycompany.myapp.dao.Ch07Member;
+
 import com.mycompany.myapp.exception.Ch10SoldOutException;
 
 import lombok.extern.log4j.Log4j2;
