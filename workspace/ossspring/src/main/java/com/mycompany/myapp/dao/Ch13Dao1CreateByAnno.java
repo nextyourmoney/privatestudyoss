@@ -8,7 +8,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Ch13Dao1CreateByAnno {
 	public Ch13Dao1CreateByAnno() {
-		log.info("tlfgod");
+		log.info("실행");
 	}
-	
 }

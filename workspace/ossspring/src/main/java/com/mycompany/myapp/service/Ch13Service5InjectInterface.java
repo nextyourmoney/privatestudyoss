@@ -14,23 +14,26 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Ch13Service5InjectInterface {
 	public Ch13Service5InjectInterface() {
-		log.info("test3");
+		log.info("실행");
 	}
 	
 	@Autowired @Qualifier("ch13DaoImpl1")
 	private Ch13DaoI ch13DaoI1;
 	
-	@Resource(name="ch13DaoImpl2")
+	@Resource(name="ch13DaoImpl2") 
 	private Ch13DaoI ch13DaoI2;
 	
 	@Autowired
-	public void setCh13DaoI1(Ch13DaoI ch13DaoI1) {
+	public void setCh13DaoI1(@Qualifier("ch13DaoImpl1") Ch13DaoI ch13DaoI1) {
+		log.info("실행");
 		this.ch13DaoI1 = ch13DaoI1;
 	}
 	
-	@Resource
-	public void setCh13DaoI2(Ch13DaoI ch13DaoI2) {
-		this.ch13DaoI2 = ch13DaoI2;
+	@Resource(name="ch13DaoImpl2")
+	public void setCh13DaoI2(Ch13DaoI ch1DaoI2) {
+		log.info("실행");
+		this.ch13DaoI2 = ch1DaoI2;
 	}
-
+	
+	
 }

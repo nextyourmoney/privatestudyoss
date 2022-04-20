@@ -8,7 +8,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Ch13DaoImpl1 implements Ch13DaoI{
 	public Ch13DaoImpl1() {
-		log.info("tlfgod2");
+		log.info("실행");
 	}
-
 }

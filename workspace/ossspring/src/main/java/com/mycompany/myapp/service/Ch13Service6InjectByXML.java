@@ -7,20 +7,41 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.mycompany.myapp.dao.Ch13Dao2CreateByXML;
+import com.mycompany.myapp.dao.Ch13Dao2CreateByXml;
 
 import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
-public class Ch13Service6InjectByXML {
-	private Ch13Dao2CreateByXML dao;
+public class Ch13Service6InjectByXml {
+	private Ch13Dao2CreateByXml dao;
 	private String str;
-	private List collection1;
+	private List collection1; 
 	private Set collection2;
 	private Map collection3;
-	private Properties collection4;
+	private Properties collection4; //map을 상속 받는데 key와 value의 값이 무조건 String 이다
 	
+	
+	public Ch13Service6InjectByXml() {
+		log.info("실행: Ch13Service6InjectByXml");
+	}
+	
+	public Ch13Service6InjectByXml(Ch13Dao2CreateByXml dao, String str) {
+		log.info("실행: Ch13Service6InjectByXml(Ch13Dao2CreateByXml dao, String str)");
+		this.dao = dao;
+		this.str = str;
+	}
+
+	public void setDao(Ch13Dao2CreateByXml dao) {
+		log.info("실행");
+		this.dao = dao;
+	}
+
+	public void setStr(String str) {
+		log.info("실행");
+		this.str = str;
+	}
+
 	public void setCollection1(List collection1) {
 		log.info("실행");
 		this.collection1 = collection1;
@@ -40,25 +61,6 @@ public class Ch13Service6InjectByXML {
 		log.info("실행");
 		this.collection4 = collection4;
 	}
-
-	public Ch13Service6InjectByXML() {
-		log.info("실행: Ch13Service6InjectByXML");
-		
-	}
 	
-	public Ch13Service6InjectByXML(Ch13Dao2CreateByXML dao, String str) {
-		log.info("실행: Ch13Service6InjectByXML");
-		this.dao = dao;
-		this.str = str;
-		
-	}
 	
-	public void setDao(Ch13Dao2CreateByXML dao) {
-		this.dao = dao;
-	}
-	
-	public void setStr(String str) {
-		this.str = str;
-	}
-
 }

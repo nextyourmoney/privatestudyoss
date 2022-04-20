@@ -10,6 +10,9 @@
     <Logger name="com.mycompany.myapp" level="info" additivity="false">
       <AppenderRef ref="Out"/>
     </Logger>
+    <Logger name = "jdbc.sqltiming" level="info" additivity="false">
+    	<AppenderRef ref="Out"/>
+     </Logger>
     <Root level="error">
       <AppenderRef ref="Out"/>
     </Root>
