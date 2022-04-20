@@ -10,7 +10,14 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
       <param-name>contextConfigLocation</param-name><!-- 키,값  여러가지 작성하는게 가능-->
       <param-value>classpath:spring/root/*.xml</param-value>
       <!--<param-value>/WEB-INF/spring/root/root-context.xml</param-value>  --><!--해당 경로의 xml정보를 이용해서  WebApplication context를 만들고 객체를 생성한다,*로 경로에 있는것 다 불러올수 있음 -->
+   
+   
+
+
    </context-param>
+   
+   
+   
    
    <!-- 웹 애플리케이션이 시작될때와 종료 될때 Root WebApplicationContext를 생성하고 제거하기 위해 ContextLoaderListener 설정-->
    <listener>

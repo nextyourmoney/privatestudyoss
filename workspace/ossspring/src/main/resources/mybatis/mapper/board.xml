@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
                  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mycompany.webapp.dao.mybatis.Ch14BoardDao">
+<mapper namespace="com.mycompany.myapp.dao.mybatis.Ch14BoardDao">
 	<select id="selectByPage" parameterType="pager" resultType="board">
 		SELECT rnum, bno, btitle, bdate, mid
 		FROM (
@@ -26,6 +26,10 @@
 	</select>
 	
 	<insert id="insert" parameterType="board">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+            select seq_bno.nextval from dual
+      </selectKey>
+      
 		<if test="battachoname == null">
 			INSERT INTO board (bno, btitle, bcontent, bdate, mid, bhitcount)
 			VALUES(SEQ_BNO.nextval, #{btitle}, #{bcontent}, SYSDATE, #{mid}, 0)
