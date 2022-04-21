@@ -12,6 +12,7 @@
 		<org.aspectj-version>1.9.7</org.aspectj-version>
 		<org.slf4j-version>1.7.30</org.slf4j-version>
 	</properties>
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -153,6 +154,14 @@
     <version>3.5.9</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.9.1</version>
+</dependency>
+
+
 <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 <dependency>
     <groupId>org.mybatis</groupId>
@@ -160,6 +169,7 @@
     <version>2.0.7</version>
 </dependency>
 
+            <!-- Spring Security -->
       <dependency>
           <groupId>org.springframework.security</groupId>
           <artifactId>spring-security-web</artifactId>
@@ -179,6 +189,7 @@
       </dependency>
 
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -207,6 +218,7 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
