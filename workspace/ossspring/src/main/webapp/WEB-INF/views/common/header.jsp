@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="/webapp/resources/css/app.css" />
+<link rel="stylesheet" href="/myapp/resources/css/app.css" />
 </head>
 <body>
    <div class="d-flex flex-column vh-100">
@@ -26,17 +26,31 @@
           <%-- <img src="<%=request.getContextPath() %>/resources/images/logo-spring.png" width="30" height="30" class="d-inline-block align-top"> Spring --%>
          </a>
          <div>
-         	<c:if test="${sessionMid == null}">
+         <%-- 	<c:if test="${sessionMid == null}">
 					<a href="${pageContext.request.contextPath}/ch08/login" class="btn btn-success btn-sm">로그인</a>
 				</c:if>
 				<c:if test="${sessionMid != null}">
 					<b>User ID: ${sessionMid}</b>
 					<a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-success btn-sm">로그아웃</a>
 					
-				</c:if>
-         
-         
-          
+				</c:if> --%>
+				
+				<sec:authorize access="isAnonymous()">
+					<a href = "${pageContext.request.contextPath}/ch17/loginForm" class="btn btn-success btn-sm">로그인</a>
+				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					<b class = "text-white mr-2"> User ID: <src:authentication property="principal.username"/></b>
+					<!-- csrf가비활성화 되어있을 경우 -->
+					<%-- <a href = "${pageContext.request.contextPath}/ch17/logout" class=btn btn-success btn-sm>로그아웃</a>  --%>
+					
+					<!-- csrf가 활성화 되어 있을 경 -->
+				   <form method="post" action="${pageContext.request.contextPath}/logout">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <button class="btn btn-success btn-sm">Ch17 로그아웃</button>
+                     </form>
+                     </sec:authorize>
+
          </div>
       </nav>
       <div class="container-fluid flex-grow-1">

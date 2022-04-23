@@ -2,6 +2,7 @@ package com.mycompany.myapp.service;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,10 @@ public class Ch14MemberService {
 	public JoinResult join(Ch14Member member) {
 		Ch14Member dbMember = memberDao.selectByMid(member.getMid());
 		if(dbMember == null) {
+			//알고리즘 기록 되는 암호
 			PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+			//알고리즘 없는 암호
+			//PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			member.setMpassword(passwordEncoder.encode(member.getMpassword()));
 			int result = memberDao.insert(member);
 			return JoinResult.SUCCESS;
@@ -52,6 +56,10 @@ public class Ch14MemberService {
 				return LoginResult.FAIL_MPASSWORD;
 			}
 		}
+	}
+	
+	public Ch14Member getMember(String mid) {
+		return memberDao.selectByMid(mid);
 	}
 	
 }
