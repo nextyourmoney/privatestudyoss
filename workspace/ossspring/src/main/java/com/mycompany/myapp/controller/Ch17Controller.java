@@ -1,22 +1,37 @@
 package com.mycompany.myapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.myapp.controller.dto.Ch14Member;
 import com.mycompany.myapp.controller.dto.Ch16Account;
+import com.mycompany.myapp.security.Ch17UserDetails;
+import com.mycompany.myapp.service.Ch14MemberService;
+import com.mycompany.myapp.service.Ch14MemberService.JoinResult;
 import com.mycompany.myapp.service.Ch16AccountService;
 import com.mycompany.myapp.service.Ch16AccountService.TransferResult;
 
+import lombok.extern.log4j.Log4j2;
+
 @Controller
 @RequestMapping("/ch17")
+@Log4j2
 public class Ch17Controller {
 	private static final Logger logger = LoggerFactory.getLogger(Ch17Controller.class);
 	
@@ -54,6 +69,75 @@ public class Ch17Controller {
 	   public String error403() {
 	      logger.info("실행");
 	      return "ch17/error403";
+	   }
+	   
+	   @Resource
+	   private Ch14MemberService memberService;
+	   
+	   @RequestMapping("/join")
+	   public String join(Ch14Member member, Model model) {
+	      log.info("실행");
+	      
+	      //활성화 설정
+	      member.setMenabled(true);
+	      
+	      //패스워드 암호화
+	      String mpassword = member.getMpassword();
+	      PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	      mpassword = passwordEncoder.encode(mpassword); 
+	      member.setMpassword(mpassword);
+
+	      //회원 가입 처리
+	      JoinResult jr = memberService.join(member);
+	      if(jr == JoinResult.SUCCESS) {
+	         return "redirect:/ch17/loginForm";
+	      } else if(jr == JoinResult.DUPLICARTED) {
+	         model.addAttribute("error", "중복된 아이디가 있습니다.");
+	         return "ch17/joinForm";
+	      } else {
+	         model.addAttribute("error", "회원 가입이 실패되었습니다. 다시 시도해 주세요.");
+	         return "ch17/joinForm";
+	      }
+	   }
+	   
+	   @RequestMapping("/joinForm")
+	   public String joinForm() {
+	      logger.info("실행");
+	      return "ch17/joinForm";
+	   }
+	   
+	   @RequestMapping(value = "/userInfo", produces="application/json")
+	   @ResponseBody
+	   public String userInfo(Authentication authentication) {
+		   //사용자 아이디 얻기
+		   String mid = authentication.getName();
+		   Ch14Member member = memberService.getMember(mid);
+		   
+		   //사용자 권한 얻기(ROLE_xxx)
+		   List<String> authorityList = new ArrayList<>();
+		   for(GrantedAuthority authority : authentication.getAuthorities()) {
+			   authorityList.add(authority.getAuthority());
+		   }
+//		   
+//		   Ch17UserDetails = (Ch17UserDetails) authentication.getPrincipal();
+//		   String memail = userDeatails.getMemail();
+		   
+		   //String authority = (String) authentication.getAuthorities().toArray()[0];
+		   
+		   //사용자가 로그인한 pc의 ip주소
+		  WebAuthenticationDetails wad = (WebAuthenticationDetails) authentication.getDetails();
+		  String ip = wad.getRemoteAddress();
+		  
+		  JSONObject jsonObject = new JSONObject();
+		  jsonObject.put("mid", mid);
+		  jsonObject.put("memail", member.getMemail());
+		  jsonObject.put("mrole", authorityList);
+		  jsonObject.put("ip", ip);
+		  
+		  String json = jsonObject.toString();
+		  
+		  return json;
+		   
 	   }
 }
 
