@@ -1,4 +1,4 @@
-package com.mycompany.bakcend.config;
+package com.mycompany.backend.config;
 
 import javax.sql.DataSource;
 
