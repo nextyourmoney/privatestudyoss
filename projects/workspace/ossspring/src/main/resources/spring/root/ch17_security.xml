@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- 보안 필터 체인 설정 -->
+
+	<!-- form 인증 방식 설정 -->
+	<!-- d여기서 login-processing-url의 /login은 spring에서 제공하는 것이다. -->
+	<!-- alayst-use-default-target에서 true를 하면 원하는 페이지로 이동 할 수 있다. -->
+	<!-- 인증이 필요 없는 요청 경로 설정 -->
+	<security:http pattern="/resources/**" security="none" />
+
+	<!-- 보안 필터 체인 설정 -->
+	<security:http>
+		<!-- form 인증 방식 설정 -->
+		<!-- d여기서 login-processing-url의 /login은 spring에서 제공하는 것이다. -->
+		<!-- alayst-use-default-target에서 true를 하면 원하는 페이지로 이동 할 수 있다. -->
+		<!-- <security:form-login login-page="/ch17/loginForm"
+			username-parameter="mid" password-parameter="mpassword"
+			login-processing-url="/login" default-target-url="/"
+			always-use-default-target="false"
+			authentication-failure-url="/ch17/loginForm" /> -->
+			
+			<!-- 원하는 코드 실행을 위한 방 -->
+			<security:form-login login-page="/ch17/loginForm"
+			username-parameter="mid" password-parameter="mpassword"
+			login-processing-url="/login" 
+			authentication-success-handler-ref="authenticationSuccessHandler"
+         authentication-failure-handler-ref="authenticationFailureHandler"/>
+
+		<!-- 로그 아웃 설정 -->
+		<!-- 여기서 logour-url의 logout은 spring기본 제공 및 설정이다. -->
+		<security:logout logout-url="/logout"
+			success-handler-ref="logoutSuccessHandler" />
+
+		<!--사이트간 요청 위조 방지 비활성화 -->
+		<security:csrf disabled="true" />
+
+		<!-- 요청 url 권한 설정 -->
+		<!-- 테스트를 진행 할 경우 아래의 3개 권한에 대해서는 삭제하고 진행한다. -->
+		<security:intercept-url pattern="/ch17/admin*"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url
+			pattern="/ch17/manager*" access="hasRole('ROLE_MANAGER')" />
+		<!-- 로그인에 성공했다면 누구나 접속을 요청 할 수 있다. -->
+		<security:intercept-url pattern="/ch17/user*"
+			access="isAuthenticated()" />
+		<!-- 인증이 필요 없는 모든 접속 가능하도 -->
+		<!-- /**는 보안 필터는 적용하지만, 로그인은 안해도 된다. -->
+		<security:intercept-url pattern="/**"
+			access="permitAll" />
+
+		<!-- 권한 없을 경우 보여줄 페이지 설정 -->
+		<security:access-denied-handler
+			error-page="/ch17/error403" />
+			
+			      <!-- 로그인 중복 방지를 위한 설정 -->
+      <security:session-management>
+         <!-- 
+         max-sessions: 최대 로그인 수
+         error-if-maximum-exceeded="true": 다른 곳에서 로그인을 할 수 없음
+         expired-url: 인증이 무료화된 사용자가 이동하는 페이지
+         -->
+         
+         <!-- 이전 로그인을 유효하게 만들기 -->
+         
+         <security:concurrency-control max-sessions="1"
+                                error-if-maximum-exceeded="true"/>
+        
+         
+         <!-- 최종 로그인을 유효하게 만들기 -->
+        <!--  <security:concurrency-control max-sessions="1"
+                                error-if-maximum-exceeded="false"
+                                expired-url="/ch17/loginForm"/> -->
+      </security:session-management>
+      </security:http>
+
+		<!-- 인증 관리자 설정(아이디와 패스워드를 DB와 비교해서 로그인 처리 관리) -->
+		<!-- 사용자가 입력한 아이디, 패스워드와 디비값 비교 -->
+
+		<security:authentication-manager>
+			<security:authentication-provider
+				ref="daoAuthenticationProvider" />
+		</security:authentication-manager>
+
+		<!-- 인증 제공자 설정 및 사용자 정보 가져오기 -->
+	<!-- 	<bean id="daoAuthenticationProvider"
+			class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+			<property name="userDetailsService" ref="jdbcUserService" />
+			<property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper" />
+			<property name="passwordEncoder" ref = "bcryptPasswordEncoder"/>
+		</bean> -->
+		
+		<!-- 알고리즘을 포함한  -->
+		<!-- <bean id="bcryptPasswordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> -->
+
+		<security:jdbc-user-service
+			id="jdbcUserService" data-source-ref="dataSource"
+			users-by-username-query="SELECT mid, mpassword, menabled FROM member WHERE mid=?"
+			authorities-by-username-query="SELECT mid, mrole FROM member WHERE mid=?" />
+
+		<!-- 권한 계층 설정 -->
+		<bean id="roleHierarchyAuthoritiesMapper"
+			class="org.springframework.security.access.hierarchicalroles.RoleHierarchyAuthoritiesMapper">
+			<constructor-arg ref="roleHierarchyImpl" />
+		</bean>
+		<bean id="roleHierarchyImpl"
+			class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+			<property name="hierarchy">
+				<value>
+					ROLE_ADMIN > ROLE_MANAGER
+					ROLE_MANAGER > ROLE_USER
+				</value>
+			</property>
+		</bean>
+		
+		<!-- <bean id="daoAuthenticationProvider"
+        class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+      <property name="userDetailsService" ref="ch17UserDetailsService"/>
+      <property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper"/>
+   </bean> -->
+		
+		<bean id="authenticationSuccessHandler" class="com.mycompany.myapp.security.Ch17AuthenticationSuccessHandler">
+			<property name = "alwaysUseDefaultTargetUrl" value = "false"></property>
+			<property name = "defaultTargetUrl" value = "/ch17/content"></property>
+		</bean>
+		
+		<bean id="authenticationFailureHandler" class="com.mycompany.myapp.security.Ch17AuthenticationFailureHandler">
+			<property name = "defaultFailureUrl" value = "/ch17/content"></property>
+		</bean>
+		
+		<bean id="logoutSuccessHandler" class="com.mycompany.myapp.security.Ch17LogoutSuccessHandler">
+			<property name = "defaultTargetUrl" value = "/ch17/content"></property>
+		</bean>
+</beans>
