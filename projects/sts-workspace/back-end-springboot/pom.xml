@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -20,7 +22,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- logback 의존성 삭제-->
+			<!-- logback 의존성 삭제 -->
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
@@ -62,7 +64,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--jsp관련 의존 설정-->
+		<!--jsp관련 의존 설정 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -78,7 +80,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
-		
+
 		<!-- json -->
 		<dependency>
 			<groupId>org.json</groupId>
@@ -86,7 +88,28 @@
 			<version>20220320</version>
 		</dependency>
 
-
+		<!-- jwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		
+		
+		<!-- security -->
+		
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-security</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId> 
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
