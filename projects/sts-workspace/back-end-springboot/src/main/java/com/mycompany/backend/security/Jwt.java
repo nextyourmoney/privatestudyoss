@@ -13,8 +13,8 @@ import lombok.extern.log4j.Log4j2;
 public class Jwt {
 	//상수
 	private static final String JWT_SECRET_KEY = "kosa12345"; //반드시 암호화 하여서 보유 할 
-	//private static final long ACCESS_TOKEN_DURATION = 1000 * 60 * 30; //30분
-	private static final long ACCESS_TOKEN_DURATION = 30000; //30초
+	private static final long ACCESS_TOKEN_DURATION = 1000 * 60 * 30; //30분
+	//private static final long ACCESS_TOKEN_DURATION = 30000; //30초
 	public static final long REFRESH_TOKEN_DURATION = 1000 * 60 * 60 * 24; //하루
 	
 	//AccessToken 생성 //권한에 대한 정보

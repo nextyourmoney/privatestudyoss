@@ -179,8 +179,37 @@ public class MemberController {
 				//.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON) 두개의 헤더는 같다. 
 				.body(json);
 	}
-}
+
 	
+	@GetMapping("/logout")
+	public ResponseEntity<String> logout(@RequestHeader("Authorization") String authorization){
+		//Access token 얻기
+		String accessToken = Jwt.getAccessToken(authorization);
+		if(accessToken == null || !Jwt.validateToken(accessToken)) {
+			return ResponseEntity.status(401).body("invalid access token");
+		}
+		
+		//redis에 저장된 인증 정보를 삭제
+		redisTemplate.delete(accessToken);
+		
+		//refreshtoken 쿠키 삭제
+		String refreshTokenCookie = ResponseCookie.from("refreshToken", "")
+				.httpOnly(true) //클라이언트에서 자바스크립트로 접근못하게 막는다. 
+				.secure(false)
+				.path("/")
+				.maxAge(0) //수명을 없앰으로써 쿠키의 삭제 효과를 만들어낸다. 
+				.domain("localhost")
+				.build()
+				.toString();
+		//응답 설정
+		return ResponseEntity
+				.ok()
+				.header(HttpHeaders.SET_COOKIE, refreshTokenCookie) //logout에서 쿠키가 삭제 효과를 가지기 때문에 삭제된다. 
+				.body("success");
+		
+	
+	}
+}
 	
 	
 
