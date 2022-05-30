@@ -111,7 +111,7 @@ public class MemberController {
 				.body(json);
 	}
 	
-	@GetMapping("/refreshToken") //리플레시 토큰	
+	@GetMapping("/refreshToken") //리플레시 토큰	//리플레시 토큰은 마지막에 접속 실패한 access토큰이 들어와야 한다. 
 	public ResponseEntity<String> refreshToken(
 			@RequestHeader("Authorization") String authorization,
 			@CookieValue("refreshToken") String refreshToken
