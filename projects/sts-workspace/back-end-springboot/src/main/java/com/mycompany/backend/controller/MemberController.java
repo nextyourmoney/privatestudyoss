@@ -1,13 +1,16 @@
 package com.mycompany.backend.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
 import org.json.JSONObject;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,6 +40,10 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Resource PasswordEncoder passwordEncoder;
+	
+	//redis 주입 설정
+	@Resource
+	private RedisTemplate<String, String> redisTemplate;
 	
 	@PostMapping("/join") //회원가입
 	public Map<String, Object> join(@RequestBody Member member){ //RequestBody는 JSON Data가 들어가야 한다. 
@@ -87,7 +94,12 @@ public class MemberController {
 		String accessToken = Jwt.createAccessToken(member.getMid(), dbMember.getMrole()); //보안 토큰 생성
 		String refreshToken = Jwt.createRefreshToken(member.getMid(), dbMember.getMrole()); //토큰 재활성?
 		
-		//쿠키 생성
+		log.info("여기인듯");
+		//redis에 저장
+		ValueOperations<String, String> vo = redisTemplate.opsForValue();
+ 		vo.set(accessToken, refreshToken, Jwt.REFRESH_TOKEN_DURATION, TimeUnit.MILLISECONDS);//access를 키, refresh를 값, 만료기간(리플레시 만료기관과 동일) 선언 
+		
+ 		//쿠키 생성
 		String refreshTokenCookie = ResponseCookie.from("refreshToken", refreshToken)
 			.httpOnly(true) //클라이언트에서 자바스크립트로 접근못하게 막는다. 
 			.secure(false)
@@ -126,12 +138,37 @@ public class MemberController {
 		if(refreshToken == null) {
 			return ResponseEntity.status(401).body("no refresh Token");
 		}
+		
+		//동일한 토큰인지 확인
+		ValueOperations<String, String> vo = redisTemplate.opsForValue();
+		String redisRefreshToken = vo.get(accessToken);
+		if(redisRefreshToken == null) {
+			//access 토큰이 잘못됐다. 
+			return ResponseEntity.status(401).body("invalidate access token");
+			
+		} 
+		
+		if(!refreshToken.equals(redisRefreshToken)) {
+			return ResponseEntity.status(401).body("invalidate refresh token");
+		}
+		
+//		if(Jwt.validateToken(redisRefreshToken)) {
+//			return ResponseEntity.status(401).body("invalidate refresh token");
+//		}
 
 		//새로운 accestoken 생성
 		Map<String, String> userInfo = Jwt.getUserInfo(refreshToken); //refreshtoken에서 값을 가져온다. refresh는 동시에 생성되었었다. 
 		String mid = userInfo.get("mid");
 		String authority = userInfo.get("authority");
 		String newAccessToken = Jwt.createAccessToken(mid, authority);
+		
+		//redis에 저장된 기본 정보를 삭제
+		redisTemplate.delete(accessToken);
+		
+		//redis의  새로운 정보를 저장
+//		vo.set(accessToken, refreshToken, Jwt.REFRESH_TOKEN_DURATION, TimeUnit.MILLISECONDS); //이건 풀타임 저장이다. 
+		Date expiration = Jwt.getExpiration(refreshToken);
+		vo.set(newAccessToken, refreshToken, expiration.getTime() - new Date().getTime(), TimeUnit.MILLISECONDS); //각각 토큰과 남은 토큰 시간이다. 
 		
 		//응답 설정
 		String json = new JSONObject().put("accessToken", newAccessToken).put("mid", mid).toString();
