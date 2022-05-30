@@ -90,7 +90,7 @@ public class RestControllerTest {
 		return list;
 	}
 	
-	//여러 형태의 
+	//여러 형태의 전송
 	@GetMapping("/useHttpServletResponse")
 	public void getHeader(HttpServletResponse response) throws IOException {
 		//응답 헤더 설정
@@ -100,7 +100,7 @@ public class RestControllerTest {
 		Cookie cookie = new Cookie("refreshToken", "XXXXX");
 		response.addCookie(cookie);
 		
-		//응답 본문 설
+		//응답 본문 설정
 		//json의존성 추가 필요 //json 자체를 객체로 사용한다.
 		PrintWriter pw = response.getWriter();
 		JSONObject jsonObject = new JSONObject();

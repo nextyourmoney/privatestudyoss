@@ -69,7 +69,7 @@ public class Jwt {
 		
 	}
 	
-	//토큰 ㅁㅁ유효성 검사
+	//토큰 유효성 검사
 	public static boolean validateToken(String token) {
 		log.info("실행");
 		boolean result = false;
