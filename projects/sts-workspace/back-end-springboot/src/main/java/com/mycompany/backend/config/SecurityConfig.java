@@ -1,6 +1,9 @@
 package com.mycompany.backend.config;
 
+import javax.annotation.Resource;
+
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,6 +26,9 @@ import lombok.extern.log4j.Log4j2;
 @EnableWebSecurity // 기본적으로 configuration이 포함되어 있기에 compiguration을선언하지 않아도 bean 생성가능
 @Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	@Resource  //......아래 쪽 bean JwtAuthenticationFileter와 연결 되는건데 뭔소리이니지하나도 모르겠음
+	private RedisTemplate redisTemplate;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		log.info("실행");
@@ -40,8 +46,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// CORS설정(다른 도메인의 javascript로 접근을 할 수 있도록 허용) ----- REST는 반드시 설정 할 것
 		http.cors();
 		//JWT 인증 필터 추가 //인증과 관련된 필터는 지정된 위치에 추가하여야 한다. //폼인증이 선언되기 전에 필터를 선언해야 한다. 
-		http.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); //본래 new JwtAuthenticationFilter()였으나 주입으로 바뀌면서 객체를 생성하면 안된다. 
 
+	}
+	
+	@Bean //맨 위쪽의 코드와 JwtAuthenticattionFilter와 연결되는건데 뭔소리인지 하나도 모륵쎄음
+	public JwtAuthenticationFilter jwtAuthenticationFilter() {
+		JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter();
+		jwtAuthenticationFilter.setRedisTemplate(redisTemplate);
+		return jwtAuthenticationFilter;
 	}
 
 	@Override
