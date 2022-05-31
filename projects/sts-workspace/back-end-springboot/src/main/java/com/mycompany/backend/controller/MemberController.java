@@ -186,7 +186,7 @@ public class MemberController {
 	public ResponseEntity<String> logout(@RequestHeader("Authorization") String authorization){ //주소 헤더의 authorizatio을 authorization으로 받아온다. 
 		//Access token 얻기
 		String accessToken = Jwt.getAccessToken(authorization);
-		if(accessToken == null || !Jwt.validateToken(accessToken)) {
+		if(accessToken == null) {
 			return ResponseEntity.status(401).body("invalid access token");
 		}
 		
