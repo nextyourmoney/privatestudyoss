@@ -42,6 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 				
 				//검증 작업
 				if(accessToken != null &&  Jwt.validateToken(accessToken)) { //유효한 로그인 입력들인지 검증한다. 
+					
 					//accesstoken의 redis에 존재 여부 확인 //아래 검증 작업의 조건에 주면서 access토큰이 없는 것 = refresh토큰이 없는 것이다. 
 					ValueOperations<String, String> vo = redisTemplate.opsForValue(); //레디스의 값 변수
 					String redisRefreshToken = vo.get(accessToken); //레디스 값 중에서 accesstoken을 찾고 있는 refresfh로 설정

@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Configuration
 public class DataSourceConfig {
+//	testnnnn
 	@Bean
 	public DataSource dataSource() {
 		log.info("실행");

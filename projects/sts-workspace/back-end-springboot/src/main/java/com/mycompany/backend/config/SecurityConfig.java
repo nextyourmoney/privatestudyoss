@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 	
-	//맨 위쪽의 코드와 JwtAuthenticattionFilter와 연결되는건데 뭔소리인지 하나도 모륵쎄음
+	//
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
 		JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter();
 		jwtAuthenticationFilter.setRedisTemplate(redisTemplate);
