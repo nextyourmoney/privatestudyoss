@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		log.info("실행");
-
+//jj
 		// 서버 세션 비활성황
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		// 폼 로그인 비활성화
